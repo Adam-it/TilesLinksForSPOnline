@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "personal-tiles-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/personalTiles/PersonalTilesWebPart.js",
+          "manifest": "./src/webparts/personalTiles/PersonalTilesWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "PersonalTilesWebPartStrings": "lib/webparts/personalTiles/loc/{locale}.js"
+  }
+}
