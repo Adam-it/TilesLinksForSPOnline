@@ -1,0 +1,19 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+@import '../../styles/main.scss';
+
+.personalTiles {
+  .row {
+    @include ms-Grid-row;
+    @include ms-fontColor-white;
+    background-color: $colorDark;
+  }
+
+  .column {
+    @include ms-Grid-col;
+  }
+
+  .title {
+    @include ms-font-xl;
+    @include ms-fontColor-white;
+  }
+}
