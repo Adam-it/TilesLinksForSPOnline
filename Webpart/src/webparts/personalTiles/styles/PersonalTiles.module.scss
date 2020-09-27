@@ -1,0 +1,47 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+@import './Main.module.scss';
+
+.personalTiles {
+  .row {
+    @include ms-Grid-row;
+  }
+
+  .column {
+    @include ms-Grid-col;
+  }
+
+  .title {
+    @include ms-font-xl;
+  }
+
+  .sortablecontainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+    padding: 24px 12px 64px;
+    max-width: 720px;
+    min-height: 332px;
+    overflow-y: auto;
+  }
+
+  .item {
+      display: flex;
+      padding: 16px;
+      position: relative;
+      max-width: 25%;
+      flex-basis: 100%;
+      border-radius: 2px;
+      flex-direction: column;
+  }
+
+  .innerItem {
+      height: 212px;
+      display: flex;
+      max-width: 100%;
+      max-height: 100%;
+      align-items: center;
+      flex-direction: row;
+      justify-content: center;
+  }
+}
