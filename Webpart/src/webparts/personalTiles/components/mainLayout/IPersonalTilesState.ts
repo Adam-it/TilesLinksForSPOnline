@@ -1,1 +1,3 @@
-export default interface IPersonalTilesState {}
+export default interface IPersonalTilesState {
+    items: { id: number, value: string }[];
+}

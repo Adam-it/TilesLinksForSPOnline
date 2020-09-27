@@ -1,5 +1,6 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
 
+// colors
 $themePrimary: "[theme: themePrimary, default: #0078d7]";
 $themeLighterAlt: "[theme: themeLighterAlt, default: #eff6fc]";
 $themeLighter: "[theme: themeLighter, default: #deecf9]";
@@ -25,3 +26,15 @@ $black: "[theme: black, default: #000000]";
 $white: "[theme: white, default: #fff]";
 $primaryBackground: "[theme: primaryBackground, default: #fff]";
 $primaryText: "[theme: primaryText, default: #333]";
+
+// font
+$fontFamily: "Monaco, Menlo, Consolas";
+
+// general styling
+$marginSize: 9px;
+
+// tiles
+$tileSize: 130px;
+
+// toolbar
+$toolBarHeight: 35px;

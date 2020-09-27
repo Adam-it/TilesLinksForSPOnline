@@ -1,0 +1,35 @@
+@import './Main.module.scss';
+
+.sortableContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+    overflow: auto;
+}
+
+.sortableItem {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    min-width: $tileSize;
+    min-height: $tileSize;
+    margin: $marginSize;
+    background-color: $themePrimary;
+}
+
+.sortableInnerItem {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    line-height: $tileSize;
+    justify-content: center;
+    color: $white;
+    font-family: $fontFamily;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.sortableItemDragging{
+    box-shadow: 0 0 $marginSize $neutralPrimary;
+}
