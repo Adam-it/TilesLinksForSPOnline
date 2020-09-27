@@ -4,8 +4,8 @@ import { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'PersonalTilesWebPartStrings';
-import PersonalTiles from './components/mainLayout/PersonalTiles';
-import IPersonalTilesProps from './components/mainLayout/IPersonalTilesProps';
+import PersonalTiles from './components/mainLayout1/PersonalTiles';
+import IPersonalTilesProps from './components/mainLayout1/IPersonalTilesProps';
 import IPersonalTilesWebPartProps from './IPersonalTilesWebPartProps';
 
 export default class PersonalTilesWebPart extends BaseClientSideWebPart <IPersonalTilesWebPartProps> {
