@@ -16,8 +16,7 @@ export default class PersonalTilesWebPart extends BaseClientSideWebPart <IPerson
     const element: React.ReactElement<IPersonalTilesProps> = React.createElement(
       PersonalTiles,
       {
-        tiles: mockTiles.getTiles(),
-        strings: strings
+        tiles: mockTiles.getTiles()
       }
     );
 

@@ -1,4 +1,1 @@
-export default interface IToolBarProps {
-    AddButtonLabel: string;
-    InfoButtonLabel: string;
-}
+export default interface IToolBarProps {}

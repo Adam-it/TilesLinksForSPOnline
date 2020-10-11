@@ -11,37 +11,59 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
 
   constructor(props) {
     super(props);
-    let items = this.props.tiles;
-    this.state = { items };
+    
+    let items = this.props.tiles.map((item) => {
+      return{
+        id: item.id,
+        value: item.value,
+        editTileClick: this.editTileHandle
+      };
+    });
+    let sortingIsActive = false;
+
+    this.state = { 
+      items,
+      sortingIsActive
+    };
+  }
+
+  public editTileHandle = (item) => {
+    console.log(item.id);
   }
 
   public onSortEnd = ({oldIndex, newIndex}) => {
     let prevItems = this.state.items;
     this.setState({
       items: arrayMove(prevItems, oldIndex, newIndex),
+      sortingIsActive: false
     });
     console.log(this.state.items);
   }
 
+  public onSortStart = () => {
+    this.setState({ sortingIsActive: true });
+  }
+
   public render() {
-    const { strings } = this.props;
     return (
       <div className={ mainStyles.personalTiles }>
         <div className={ mainStyles.grid }>
           <div className={ mainStyles.row }>
             <div className= { mainStyles.columnFullWidth }>
-              <ToolBar 
-              AddButtonLabel= { strings.AddNewTileButton }
-              InfoButtonLabel= { strings.InfoButton }/>
+              <ToolBar />
             </div>
           </div>
           <div className={ mainStyles.row }>
             <div className={ mainStyles.columnFullWidth }>
-              <SortableList 
-                items={ this.state.items } 
-                axis="xy"
-                helperClass={ sortableStyles.sortableItemDragging }
-                onSortEnd={ this.onSortEnd } />
+              <div className={ this.state.sortingIsActive ? sortableStyles.isSortingActive : null } >
+                <SortableList 
+                  items={ this.state.items } 
+                  axis="xy"
+                  helperClass={ sortableStyles.sortableItemDragging }
+                  onSortEnd={ this.onSortEnd }
+                  onSortStart={ this.onSortStart }
+                  useDragHandle={ true } />
+              </div>
             </div>
           </div>
         </div>

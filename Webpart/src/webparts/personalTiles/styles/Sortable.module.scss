@@ -1,3 +1,4 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
 @import './Main.module.scss';
 
 .sortableContainer {
@@ -8,6 +9,10 @@
     overflow: auto;
 }
 
+.isSortingActive .sortableItem label{
+    display: none !important;
+}
+
 .sortableItem {
     display: flex;
     position: relative;
@@ -16,6 +21,27 @@
     min-height: $tileSize;
     margin: $marginSize;
     background-color: $themePrimary;
+
+    label{
+        position: absolute;
+        cursor: pointer;
+        top: 4px;
+        color: $white;
+        display: none;
+        transition: all 0.2s ease-in-out;
+
+        &.editButton{
+            right: 4px;
+        }
+    
+        &.moveButton{
+            right: 22px;
+        }
+    }
+
+    &:hover label{
+        display: block;
+    }
 }
 
 .sortableInnerItem {

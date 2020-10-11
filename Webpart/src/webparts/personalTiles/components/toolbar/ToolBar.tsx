@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as strings from 'PersonalTilesWebPartStrings';
 import IToolBarProps from './IToolBarProps';
 import IToolBarState from './IToolBarState';
 import mainStyles from '../../styles/PersonalTiles.module.scss';
@@ -8,16 +9,15 @@ export default class ToolBar extends React.Component<IToolBarProps, IToolBarStat
 
     constructor(props) {
         super(props);
-        const { AddButtonLabel, InfoButtonLabel } = this.props;
         this.state = {
             items: [{
                 key: 'newItem',
-                text: AddButtonLabel,
+                text: strings.AddNewTileButton,
                 iconProps: { iconName: 'Add' }
             }],
             farItems: [{
                 key: 'info',
-                text: InfoButtonLabel,
+                text: strings.InfoButton,
                 iconOnly: true,
                 iconProps: { iconName: 'Info' }
               }]

@@ -1,4 +1,7 @@
 export default interface IPersonalTilesProps {
-    tiles: { id: number, value: string }[];
-    strings: IPersonalTilesWebPartStrings;
+    tiles: 
+    { 
+        id: number, 
+        value: string 
+    }[];
 }
