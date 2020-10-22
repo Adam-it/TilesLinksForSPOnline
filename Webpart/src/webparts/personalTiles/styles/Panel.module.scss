@@ -8,7 +8,7 @@
     top: 0px;
     bottom: 0px;
     width: $width;
-    background: white;
+    background: $white;
     white-space: nowrap;
     overflow: hidden;
     box-shadow: 0 0 5px 0 rgba(0,0,0,.4);
@@ -16,7 +16,7 @@
     &.left {
         left: -$width;
         transition: left $duration;
-        border-right: 1px solid #eaeaea;
+        border-right: 1px solid $grey;
 
         &.visible {
             left: 0px;
@@ -26,7 +26,7 @@
     &.right {
         right: -$width;
         transition: right $duration;
-        border-left: 1px solid #eaeaea;
+        border-left: 1px solid $grey;
 
         &.visible {
             right: 0px;
