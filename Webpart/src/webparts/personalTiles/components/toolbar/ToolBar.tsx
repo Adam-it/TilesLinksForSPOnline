@@ -13,24 +13,24 @@ export default class ToolBar extends React.Component<IToolBarProps, IToolBarStat
             items: [{
                 key: 'newItem',
                 text: strings.AddNewTileButton,
-                iconProps: { iconName: 'Add' }
+                iconProps: {iconName: 'Add'},
+                onClick: this.props.addHandel
             }],
             farItems: [{
                 key: 'info',
                 text: strings.InfoButton,
                 iconOnly: true,
-                iconProps: { iconName: 'Info' }
+                iconProps: {iconName: 'Info'}
               }]
         };
     }
 
     public render() {
-        
         return(
-            <div className={ mainStyles.toolBar }>
+            <div className={mainStyles.toolBar}>
                 <CommandBar
-                    items={ this.state.items }
-                    farItems={ this.state.farItems }
+                    items={this.state.items}
+                    farItems={this.state.farItems}
                 />
             </div>
         );

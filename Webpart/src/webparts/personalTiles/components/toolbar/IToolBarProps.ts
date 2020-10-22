@@ -1,1 +1,3 @@
-export default interface IToolBarProps {}
+export default interface IToolBarProps {
+    addHandel: any;
+}

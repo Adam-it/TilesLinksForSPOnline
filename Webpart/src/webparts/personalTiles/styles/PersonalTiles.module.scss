@@ -5,19 +5,19 @@
 
   .grid {
     @include ms-Grid;
-  }
 
-  .row {
-    @include ms-Grid-row;
-  }
+    .row {
+      @include ms-Grid-row;
 
-  .columnFullWidth {
-    @include ms-Grid-col;
-    @include ms-sm12;
-  }
+      .columnFullWidth {
+        @include ms-Grid-col;
+        @include ms-sm12;
 
-  .title {
-    @include ms-font-xl;
+        .title {
+          @include ms-font-xl;
+        }
+      }
+    }
   }
 
   .toolBar{

@@ -3,13 +3,13 @@ import sortableStyles from '../../styles/Sortable.module.scss';
 import { SortableContainer } from 'react-sortable-hoc';
 import SortableItem from '../sortableItem/SortableItem';
 
-export default SortableContainer(({ items }) => (
+export default SortableContainer(({items}) => (
     <div className={ sortableStyles.sortableContainer }>
       {items.map((item, index) => (
         <SortableItem
-          key={ `${item.id}` }
-          index={ index }
-          item={ item }
+          key={item.id}
+          index={index}
+          item={item}
         />
       ))}
     </div>
