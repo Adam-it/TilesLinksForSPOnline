@@ -8,12 +8,16 @@ import PersonalTiles from './components/mainLayout/PersonalTiles';
 import IPersonalTilesProps from './components/mainLayout/IPersonalTilesProps';
 import IPersonalTilesWebPartProps from './IPersonalTilesWebPartProps';
 
+import mockTiles from './mocks/mockTiles';
+
 export default class PersonalTilesWebPart extends BaseClientSideWebPart <IPersonalTilesWebPartProps> {
 
   public render(): void {
     const element: React.ReactElement<IPersonalTilesProps> = React.createElement(
       PersonalTiles,
-      {}
+      {
+        tiles: mockTiles.getTiles()
+      }
     );
 
     ReactDom.render(element, this.domElement);
