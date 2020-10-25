@@ -7,6 +7,12 @@ declare interface IPersonalTilesWebPartStrings {
   AddPanelTileUrl: string;
   AddPanelSubmitButton: string;
   AddPanelCancelButton: string;
+  EditPanelTitle: string;
+  EditPanelTileTitle: string;
+  EditPanelTileUrl: string;
+  EditPanelCancelButton: string;
+  EditPanelSubmitEditButton: string;
+  EditPanelDeleteButton: string;
 }
 
 declare module 'PersonalTilesWebPartStrings' {

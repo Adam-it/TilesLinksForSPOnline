@@ -25,12 +25,14 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
         editTileClick: this._editTileHandle
       };
     });
+    let itemToEdit = null;
     let sortingIsActive:boolean = false;
     let sidePanelOpen:boolean = false;
     let panelType:PanelType = PanelType.Add;
 
     this.state = { 
       items,
+      itemToEdit,
       sortingIsActive,
       sidePanelOpen,
       panelType
@@ -65,6 +67,22 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     this.setState({items});
   }
 
+  private _onRemoveTile(id:number){
+    let items = this.state.items;
+    items = items.filter(x => {
+      return x.id != id;
+    });
+    this.setState({items});
+  }
+
+  private _onEditTitle(id:number, name:string, url:string){
+    let items = this.state.items;
+    let item = items.filter(x => x.id === id)[0];
+    item.value = name;
+    item.url = url;
+    this.setState({items});
+  }
+
   private _addTileHandle() {
     this.setState({ 
       sidePanelOpen: !this.state.sidePanelOpen,
@@ -75,7 +93,12 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
   private _editTileHandle = (item) => {
     this.setState({ 
       sidePanelOpen: !this.state.sidePanelOpen,
-      panelType: PanelType.Edit
+      panelType: PanelType.Edit,
+      itemToEdit: {
+        id: item.id,
+        url: item.url,
+        value: item.value
+      }
     });
   }
 
@@ -84,7 +107,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       items, 
       sortingIsActive, 
       sidePanelOpen,
-      panelType } = this.state;
+      panelType,
+      itemToEdit } = this.state;
 
     return (
       <div className={mainStyles.personalTiles}>
@@ -111,7 +135,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
         <Panel isOpen={sidePanelOpen} position={PanelPosition.Right} onDismiss={this._onPanelClosed.bind(this)}>
           {panelType === PanelType.Add ? 
             <AddPanel onDismiss={() => this._onPanelClosed()} onAddNewTile={this._onAddNewTile.bind(this)} /> : 
-            <EditPanel/>}
+            <EditPanel tile={itemToEdit} onDismiss={() => this._onPanelClosed()} onRemove={this._onRemoveTile.bind(this)} onEdit={this._onEditTitle.bind(this)}/>}
         </Panel>
       </div>
     );
