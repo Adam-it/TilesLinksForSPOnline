@@ -8,5 +8,11 @@ define([], function() {
     "AddPanelTileUrl": "Url:",
     "AddPanelSubmitButton": "Add",
     "AddPanelCancelButton": "Cancel",
+    "EditPanelTitle": "Edit tile",
+    "EditPanelTileTitle": "Name:",
+    "EditPanelTileUrl": "Url:",
+    "EditPanelCancelButton": "Cancel",
+    "EditPanelSubmitEditButton": "Edit",
+    "EditPanelDeleteButton": "Remove"
   }
 });

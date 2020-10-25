@@ -8,6 +8,11 @@ export default interface IPersonalTilesState {
         url: string,
         editTileClick: any
     }[];
+    itemToEdit: {
+        id: number, 
+        value: string,
+        url: string,
+    };
     sortingIsActive: boolean;
     sidePanelOpen: boolean;
     panelType: PanelType;
