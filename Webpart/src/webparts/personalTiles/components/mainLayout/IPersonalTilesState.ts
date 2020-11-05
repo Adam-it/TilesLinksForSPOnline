@@ -1,11 +1,10 @@
+import ITileItem from '../../model/ITileItem';
 import { PanelType } from '../panelLayout/PanelType';
 
 export default interface IPersonalTilesState {
     items: 
     { 
-        id: number, 
-        value: string,
-        url: string,
+        item: ITileItem,
         editTileClick: any
     }[];
     itemToEdit: {

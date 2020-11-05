@@ -11,6 +11,7 @@ import { PanelPosition } from '../panelLayout/PanelPosition';
 import AddPanel from '../addPanel/AddPanel';
 import EditPanel from '../editPanel/EditPanel';
 import { PanelType } from '../panelLayout/PanelType';
+import ITileItem from '../../model/ITileItem';
 
 export default class PersonalTiles extends React.Component<IPersonalTilesProps, IPersonalTilesState> {
 
@@ -19,9 +20,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     
     let items = this.props.tiles.map((item) => {
       return{
-        id: item.id,
-        value: item.value,
-        url: item.url,
+        item,
         editTileClick: this._editTileHandle
       };
     });
@@ -58,10 +57,13 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
 
   private _onAddNewTile(name:string, url:string){
     let items = this.state.items;
+    let itemsLength = items.length;
     items.push({
-      id: items.length + 1,
-      value: name,
-      url: url,
+      item:{
+        id: itemsLength + 1,
+        value: name,
+        url: url
+      },
       editTileClick: this._editTileHandle
     });
     this.setState({items});
@@ -70,14 +72,14 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
   private _onRemoveTile(id:number){
     let items = this.state.items;
     items = items.filter(x => {
-      return x.id != id;
+      return x.item.id != id;
     });
     this.setState({items});
   }
 
   private _onEditTitle(id:number, name:string, url:string){
     let items = this.state.items;
-    let item = items.filter(x => x.id === id)[0];
+    let item = items.filter(x => x.item.id === id)[0].item;
     item.value = name;
     item.url = url;
     this.setState({items});
@@ -90,7 +92,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     });
   }
 
-  private _editTileHandle = (item) => {
+  private _editTileHandle = (item: ITileItem) => {
     this.setState({ 
       sidePanelOpen: !this.state.sidePanelOpen,
       panelType: PanelType.Edit,

@@ -1,8 +1,5 @@
+import ITileItem from "../../model/ITileItem";
+
 export default interface IPersonalTilesProps {
-    tiles: 
-    { 
-        id: number, 
-        value: string,
-        url: string
-    }[];
+    tiles: ITileItem[];
 }
