@@ -2,13 +2,10 @@ import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
 import * as strings from 'PersonalTilesWebPartStrings';
 import PersonalTiles from './components/mainLayout/PersonalTiles';
 import IPersonalTilesProps from './components/mainLayout/IPersonalTilesProps';
 import IPersonalTilesWebPartProps from './IPersonalTilesWebPartProps';
-
-import mockTiles from './mocks/mockTiles';
 
 export default class PersonalTilesWebPart extends BaseClientSideWebPart <IPersonalTilesWebPartProps> {
 
@@ -16,7 +13,7 @@ export default class PersonalTilesWebPart extends BaseClientSideWebPart <IPerson
     const element: React.ReactElement<IPersonalTilesProps> = React.createElement(
       PersonalTiles,
       {
-        tiles: mockTiles.getTiles()
+        context: this.context
       }
     );
 

@@ -2,7 +2,7 @@ import * as React from 'react';
 import IPanelProps from './IPanelProps';
 import IPanelState from './IPanelState';
 import panelStyles from '../../styles/Panel.module.scss';
-import { PanelPosition } from './PanelPosition';
+import { PanelPosition } from '../../model/enums/PanelPosition';
 import { Layer, IconButton } from 'office-ui-fabric-react';
 import * as classnames from 'classnames';
 
@@ -17,7 +17,7 @@ export default class Panel extends React.Component<IPanelProps, IPanelState> {
         };
     }
 
-    public componentWillReceiveProps(newProps: IPanelProps) {
+    public componentWillReceiveProps(newProps: IPanelProps): void {
         if (newProps.isOpen === this.props.isOpen)
             return;
 
@@ -41,30 +41,30 @@ export default class Panel extends React.Component<IPanelProps, IPanelState> {
         }
     }
 
-    public componentDidUpdate(prevProps: IPanelProps, prevState: IPanelState) {
+    public componentDidUpdate(prevProps: IPanelProps, prevState: IPanelState): void {
         if (!prevProps.isOpen && !prevState.isVisible && this.state.isOpen) {
             setTimeout(this._onOpen.bind(this), 45);
         }
     }
 
-    private _onDismiss() {
+    private _onDismiss(): void {
         this._close();
     }
 
-    private _close() {
+    private _close(): void {
         this._onCloseTimer = setTimeout(this._onClose.bind(this), parseFloat(panelStyles.duration));
         this.setState({
             isVisible: false
         });
     }
 
-    private _onOpen() {
+    private _onOpen(): void {
         this.setState({
             isVisible: true
         });
     }
 
-    private _onClose() {
+    private _onClose(): void {
         this.setState({
             isOpen: false
         });

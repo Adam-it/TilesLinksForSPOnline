@@ -1,4 +1,4 @@
-import { PanelPosition } from './PanelPosition';
+import { PanelPosition } from '../../model/enums/PanelPosition';
 
 export default interface IPanelProps {
     isOpen?: boolean;

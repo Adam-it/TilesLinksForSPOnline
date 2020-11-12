@@ -16,20 +16,20 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
         };
     } 
 
-    private _cancel() {
+    private _cancel(): void {
         this.props.onDismiss();
     }
 
-    private _addTile(){
+    private _addTile(): void {
         this.props.onAddNewTile(this.state.tileName, this.state.tileUrl);
         this.props.onDismiss();
     }
 
-    private _handleTitleChange(event) {
+    private _handleTitleChange(event): void {
         this.setState({tileName: event.target.value});
     }
 
-    private _handleUrlChange(event) {
+    private _handleUrlChange(event): void {
         this.setState({tileUrl: event.target.value});
     }
 

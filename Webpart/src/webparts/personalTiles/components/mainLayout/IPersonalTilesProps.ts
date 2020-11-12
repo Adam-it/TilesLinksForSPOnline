@@ -1,8 +1,5 @@
+import { WebPartContext } from "@microsoft/sp-webpart-base";
+
 export default interface IPersonalTilesProps {
-    tiles: 
-    { 
-        id: number, 
-        value: string,
-        url: string
-    }[];
+    context: WebPartContext;
 }
