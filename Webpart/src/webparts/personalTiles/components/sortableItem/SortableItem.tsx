@@ -1,5 +1,5 @@
 import * as React from 'react';
-import GlobalSettings from '../../globals/GlobalSettings1';
+import GlobalSettings from '../../globals/GlobalSettings';
 import sortableStyles from '../../styles/Sortable.module.scss';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';

@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientResponse } from '@microsoft/sp-http';
 import ITileItemsServiceInput from "../../model/tileItemsService/ITileItemsServiceInput";
-import GlobalSettings from "../../globals/GlobalSettings1";
+import GlobalSettings from "../../globals/GlobalSettings";
 import IAppData from "../../model/IAppData";
 
 export default class TileItemsService {
