@@ -6,8 +6,8 @@ import IAppData from "../../model/IAppData";
 export default class TileItemsService {
 
     private _clients: ITileItemsServiceInput = null;
-    private _appDataFolderName: string = null
-    private _appDataJsonFileName: string = null
+    private _appDataFolderName: string = null;
+    private _appDataJsonFileName: string = null;
 
     constructor(input: ITileItemsServiceInput) {
         this._clients = input;
