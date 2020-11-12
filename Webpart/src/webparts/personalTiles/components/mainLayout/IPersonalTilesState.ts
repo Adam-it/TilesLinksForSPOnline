@@ -1,5 +1,6 @@
 import ITileItem from '../../model/ITileItem';
-import { PanelType } from '../panelLayout/PanelType';
+import { PanelType } from '../../model/enums/PanelType';
+import TileItemsService from '../../services/tileItemsService/TileItemsService';
 
 export default interface IPersonalTilesState {
     items: 
@@ -7,12 +8,9 @@ export default interface IPersonalTilesState {
         item: ITileItem,
         editTileClick: any
     }[];
-    itemToEdit: {
-        id: number, 
-        value: string,
-        url: string,
-    };
+    itemToEdit: ITileItem;
     sortingIsActive: boolean;
     sidePanelOpen: boolean;
     panelType: PanelType;
+    tileItemsService: TileItemsService;
 }

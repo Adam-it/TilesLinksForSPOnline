@@ -1,5 +1,7 @@
+import ITileItem from "../model/ITileItem";
+
 export default class mockTiles {
-    public static getTiles(): { id: number, value: string, url: string }[] {
+    public static getTiles(): ITileItem[] {
         return [
             {
               id: 0,

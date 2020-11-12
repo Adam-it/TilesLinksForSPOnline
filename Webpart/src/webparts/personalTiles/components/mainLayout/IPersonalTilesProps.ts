@@ -1,5 +1,5 @@
-import ITileItem from "../../model/ITileItem";
+import { WebPartContext } from "@microsoft/sp-webpart-base";
 
 export default interface IPersonalTilesProps {
-    tiles: ITileItem[];
+    context: WebPartContext;
 }

@@ -19,26 +19,26 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
         };
     }
 
-    private _cancel() {
+    private _cancel(): void {
         this.props.onDismiss();
     }
 
-    private _delete(){
+    private _delete(): void {
         this.props.onRemove(this.state.tileId);
         this.props.onDismiss();
     }
 
-    private _edit(){
+    private _edit(): void {
         const {tileId, tileName, tileUrl} = this.state;
         this.props.onEdit(tileId, tileName, tileUrl);
         this.props.onDismiss();
     }
 
-    private _handleTitleChange(event) {
+    private _handleTitleChange(event): void {
         this.setState({tileName: event.target.value});
     }
 
-    private _handleUrlChange(event) {
+    private _handleUrlChange(event): void {
         this.setState({tileUrl: event.target.value});
     }
 

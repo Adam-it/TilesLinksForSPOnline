@@ -2,11 +2,12 @@ import * as React from 'react';
 import GlobalSettings from '../../globals/GlobalSettings';
 import sortableStyles from '../../styles/Sortable.module.scss';
 import { SortableElement, SortableHandle } from 'react-sortable-hoc';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
 
 export default SortableElement(({item}) => {
   const DragHandle = SortableHandle(() => 
   <label className={sortableStyles.moveButton}>
-    <i className="ms-Icon ms-Icon--Move" aria-hidden="true"></i>
+    <Icon iconName={"Move"} />
   </label>);
   let tileItem = item.item;
   let displayName = tileItem.value;
@@ -16,7 +17,7 @@ export default SortableElement(({item}) => {
   return(
     <div className={sortableStyles.sortableItem}>
       <label className={sortableStyles.editButton} onClick={() => {item.editTileClick(tileItem);}}>
-        <i className="ms-Icon ms-Icon--Edit" aria-hidden="true"></i>
+        <Icon iconName={"Edit"} />
       </label>
       <DragHandle />
       <a className={sortableStyles.sortableInnerItem} href={tileItem.url}>
