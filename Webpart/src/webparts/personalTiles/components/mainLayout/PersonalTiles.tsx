@@ -18,6 +18,7 @@ import IAppData from '../../model/IAppData';
 import TileItemsService from '../../services/tileItemsService/TileItemsService';
 import ITileItemsServiceInput from '../../model/tileItemsService/ITileItemsServiceInput';
 import mockTiles from '../../mocks/mockTiles';
+import { Label } from 'office-ui-fabric-react/lib/Label';
 
 export default class PersonalTiles extends React.Component<IPersonalTilesProps, IPersonalTilesState> {
 
@@ -127,10 +128,14 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
 
   private _onAddNewTile(name:string, url:string): void {
     let items = this.state.items;
-    let itemsLength = items.length;
+    
+    let nextItemId = items.map(item => item.item.id).sort((a, b) => b-a)[0];
+    if (!nextItemId)
+      nextItemId = 0;
+
     items.push({
       item:{
-        id: itemsLength + 1,
+        id: nextItemId + 1,
         value: name,
         url: url
       },
@@ -146,8 +151,10 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     items = items.filter(x => {
       return x.item.id != id;
     });
-    this.setState({items});
-    let appData: IAppData = { UserTiles: this.state.items.map(_ => _.item) };
+    this.setState({
+      items
+    });
+    let appData: IAppData = { UserTiles: items.map(_ => _.item) };
     this.state.tileItemsService.createOrUpdateJsonDataFile(appData);
   }
 
@@ -188,12 +195,21 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       panelType,
       itemToEdit } = this.state;
 
+    const { 
+      webpartTitle,
+      webpartInfo } = this.props.webpartLabelConfig;
+
     return (
       <div className={mainStyles.personalTiles}>
         <div className={mainStyles.grid}>
           <div className={mainStyles.row}>
             <div className= {mainStyles.columnFullWidth}>
-              <ToolBar addHandel={() => this._addTileHandle()}/>
+              <Label className={mainStyles.title}>{webpartTitle}</Label>
+            </div>
+          </div>
+          <div className={mainStyles.row}>
+            <div className= {mainStyles.columnFullWidth}>
+              <ToolBar addHandel={() => this._addTileHandle()} infoText={webpartInfo}/>
             </div>
           </div>
           <div className={mainStyles.row}>

@@ -21,7 +21,8 @@
     "description": { "default": "personal-tiles description" },
     "officeFabricIconFontName": "Page",
     "properties": {
-      "description": "personal-tiles"
+      "personalTilesWebpartTitle": "personal links",
+      "personalTilesWebpartDescription": ""
     }
   }]
 }

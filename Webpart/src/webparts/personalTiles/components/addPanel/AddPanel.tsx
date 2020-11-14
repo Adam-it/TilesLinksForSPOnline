@@ -4,6 +4,7 @@ import IAddPanelProps from './IAddPanelProps';
 import IAddPanelState from './IAddPanelState';
 import panelStyles from '../../styles/Panel.module.scss';
 import { Label, TextField, Stack, ActionButton, IIconProps } from 'office-ui-fabric-react';
+import GlobalSettings from '../../globals/GlobalSettings';
 
 export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelState> {
 
@@ -12,7 +13,9 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
 
         this.state = {
             tileName: "",
-            tileUrl: ""
+            tileNameValidation: "",
+            tileUrl: "",
+            tileUrlValidation: ""
         };
     } 
 
@@ -21,16 +24,55 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
     }
 
     private _addTile(): void {
-        this.props.onAddNewTile(this.state.tileName, this.state.tileUrl);
-        this.props.onDismiss();
+        const {tileName, tileUrl} = this.state;
+        
+        let panelIsValid: boolean = true;
+        let tileNameValidation: string = "";
+        if (tileName === "") {
+            tileNameValidation = strings.PanelTitleValidation;
+            panelIsValid = false;
+        }
+        let tileUrlValidation: string = "";
+        if (tileUrl === "") {
+            tileUrlValidation = strings.PanelUrlValidation;
+            panelIsValid = false;
+        }
+
+        if (panelIsValid){
+            this.props.onAddNewTile(tileName, `${GlobalSettings.httpsProtocol}${tileUrl}`);
+            this.props.onDismiss();
+        } else {
+            this.setState({
+                tileNameValidation,
+                tileUrlValidation
+            });
+        }
     }
 
     private _handleTitleChange(event): void {
-        this.setState({tileName: event.target.value});
+        const title: string = event.target.value;
+        
+        let validation: string = "";
+        if (title === "")
+            validation = strings.PanelTitleValidation;
+
+        this.setState({
+            tileName: title,
+            tileNameValidation: validation
+        });
     }
 
     private _handleUrlChange(event): void {
-        this.setState({tileUrl: event.target.value});
+        const url: string = event.target.value;
+
+        let validation: string = "";
+        if (url === "")
+            validation = strings.PanelUrlValidation;
+
+        this.setState({
+            tileUrl: url,
+            tileUrlValidation: validation
+        });
     }
 
     public render() {
@@ -38,7 +80,11 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
         const textTileUrlId: string = "textTileUrlId";
         const addIcon: IIconProps = {iconName: 'Add'};
         const cancelIcon: IIconProps = {iconName: 'Cancel'};
-        const {tileName, tileUrl} = this.state;
+        const {
+            tileName,
+            tileNameValidation,
+            tileUrl,
+            tileUrlValidation} = this.state;
 
         return(
             <div className={panelStyles.grid}>
@@ -49,10 +95,12 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
                     <div className={panelStyles.columnFullWidth}>
                         <Label htmlFor={textTileNameId} required>{strings.AddPanelTileTitle}</Label>
                         <TextField id={textTileNameId} value={tileName} autoComplete="off" onChange={(e) => this._handleTitleChange(e)}/>
+                        <Label className={panelStyles.errorLabel}>{tileNameValidation}</Label>
                     </div>
                     <div className={panelStyles.columnFullWidth}>
                         <Label htmlFor={textTileUrlId} required>{strings.AddPanelTileUrl}</Label>
                         <TextField id={textTileUrlId} prefix="https://" value={tileUrl} autoComplete="off" onChange={(e) => this._handleUrlChange(e)}/>
+                        <Label className={panelStyles.errorLabel}>{tileUrlValidation}</Label>
                     </div>
                     <div className={panelStyles.columnFullWidth}>
                         <Stack horizontal className={panelStyles.buttonStack}>

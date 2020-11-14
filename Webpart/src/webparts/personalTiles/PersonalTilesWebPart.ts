@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
-import { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
+import { IPropertyPaneConfiguration, PropertyPaneTextField } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'PersonalTilesWebPartStrings';
 import PersonalTiles from './components/mainLayout/PersonalTiles';
@@ -13,6 +13,10 @@ export default class PersonalTilesWebPart extends BaseClientSideWebPart <IPerson
     const element: React.ReactElement<IPersonalTilesProps> = React.createElement(
       PersonalTiles,
       {
+        webpartLabelConfig: {
+          webpartTitle: this.properties.personalTilesWebpartTitle,
+          webpartInfo: this.properties.personalTilesWebpartDescription
+        },
         context: this.context
       }
     );
@@ -31,7 +35,21 @@ export default class PersonalTilesWebPart extends BaseClientSideWebPart <IPerson
           header: {
             description: strings.PropertyPaneDescription
           },
-          groups: []
+          groups: [
+            {
+              groupName: strings.PropertyPaneGeneralGroupName,
+              groupFields: [
+                PropertyPaneTextField('personalTilesWebpartTitle', {
+                  label: strings.PropertyPaneTitleField
+                }),
+                PropertyPaneTextField('personalTilesWebpartDescription', {
+                  label: strings.PropertyPaneInfoField,
+                  multiline: true,
+                  rows: 5
+                })
+              ]
+            }
+          ]
         }
       ]
     };

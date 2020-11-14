@@ -63,6 +63,11 @@
                         @include ms-font-xl;
                     }
 
+                    .errorLabel {
+                        @include ms-font-xs;
+                        color: $red;
+                    }
+
                     .buttonStack{
                         float: right;
                         margin-top: 20px;

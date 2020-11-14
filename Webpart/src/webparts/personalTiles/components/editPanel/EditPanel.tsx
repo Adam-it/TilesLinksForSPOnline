@@ -4,6 +4,7 @@ import IEditPanelProps from './IEditPanelProps';
 import IEditPanelState from './IEditPanelState';
 import panelStyles from '../../styles/Panel.module.scss';
 import { Label, TextField, Stack, ActionButton, IIconProps } from 'office-ui-fabric-react';
+import GlobalSettings from '../../globals/GlobalSettings';
 
 export default class EditPanel extends React.Component<IEditPanelProps, IEditPanelState> {
 
@@ -15,7 +16,9 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
         this.state = {
             tileId: tile.id,
             tileName: tile.value,
-            tileUrl: tile.url
+            tileUrl: tile.url.replace(GlobalSettings.httpsProtocol, ""),
+            tileNameValidation: "",
+            tileUrlValidation: ""
         };
     }
 
@@ -30,16 +33,54 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
 
     private _edit(): void {
         const {tileId, tileName, tileUrl} = this.state;
-        this.props.onEdit(tileId, tileName, tileUrl);
-        this.props.onDismiss();
+
+        let panelIsValid: boolean = true;
+        let tileNameValidation: string = "";
+        if (tileName === "") {
+            tileNameValidation = strings.PanelTitleValidation;
+            panelIsValid = false;
+        }
+        let tileUrlValidation: string = "";
+        if (tileUrl === "") {
+            tileUrlValidation = strings.PanelUrlValidation;
+            panelIsValid = false;
+        }
+
+        if (panelIsValid){
+            this.props.onEdit(tileId, tileName, `${GlobalSettings.httpsProtocol}${tileUrl}`);
+            this.props.onDismiss();
+        } else {
+            this.setState({
+                tileNameValidation,
+                tileUrlValidation
+            });
+        }
     }
 
     private _handleTitleChange(event): void {
-        this.setState({tileName: event.target.value});
+        const title = event.target.value;
+        
+        let validation = "";
+        if (title === "")
+            validation = strings.PanelTitleValidation;
+
+        this.setState({
+            tileName: title,
+            tileNameValidation: validation
+        });
     }
 
     private _handleUrlChange(event): void {
-        this.setState({tileUrl: event.target.value});
+        const url = event.target.value;
+
+        let validation = "";
+        if (url === "")
+            validation = strings.PanelUrlValidation;
+
+        this.setState({
+            tileUrl: url,
+            tileUrlValidation: validation
+        });
     }
 
     public render() {   
@@ -64,7 +105,11 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
             iconName: 'Delete',
             styles: deleteButtonStyle
             };
-        const {tileName, tileUrl} = this.state;
+            const {
+                tileName,
+                tileNameValidation,
+                tileUrl,
+                tileUrlValidation} = this.state;
 
         return(
             <div className={panelStyles.grid}>
@@ -75,10 +120,12 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
                     <div className={panelStyles.columnFullWidth}>
                         <Label htmlFor={textTileNameId} required>{strings.EditPanelTileTitle}</Label>
                         <TextField id={textTileNameId} value={tileName} autoComplete="off" onChange={(e) => this._handleTitleChange(e)}/>
+                        <Label className={panelStyles.errorLabel}>{tileNameValidation}</Label>
                     </div>
                     <div className={panelStyles.columnFullWidth}>
                         <Label htmlFor={textTileUrlId} required>{strings.EditPanelTileUrl}</Label>
                         <TextField id={textTileUrlId} prefix="https://" value={tileUrl} autoComplete="off" onChange={(e) => this._handleUrlChange(e)}/>
+                        <Label className={panelStyles.errorLabel}>{tileUrlValidation}</Label>
                     </div>
                     <div className={panelStyles.columnFullWidth}>
                         <Stack horizontal className={panelStyles.buttonStack}>
