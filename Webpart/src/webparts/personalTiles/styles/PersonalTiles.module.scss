@@ -1,5 +1,6 @@
 @import '~office-ui-fabric-react/dist/sass/References.scss';
 @import './Main.module.scss';
+@import './Animations.module.scss';
 
 .personalTiles {
 
@@ -18,6 +19,25 @@
         }
       }
     }
+  }
+
+  .loader {
+    text-align: center;
+    @include ms-font-xl;
+    color: $neutralSecondary;
+    margin-top: 2rem;
+
+    i {
+      -webkit-animation: rotating 2s linear infinite;
+      -moz-animation: rotating 2s linear infinite;
+      -ms-animation: rotating 2s linear infinite;
+      -o-animation: rotating 2s linear infinite;
+      animation: rotating 2s linear infinite;
+    }
+  }
+
+  .hide {
+    display: none
   }
 
   .toolBar{

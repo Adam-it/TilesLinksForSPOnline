@@ -17,6 +17,7 @@ define([], function() {
     "EditPanelSubmitEditButton": "Edit",
     "EditPanelDeleteButton": "Remove",
     "PanelTitleValidation": "title field is required",
-    "PanelUrlValidation": "url field is required"
+    "PanelUrlValidation": "url field is required",
+    "Loading": "Loading..."
   }
 });

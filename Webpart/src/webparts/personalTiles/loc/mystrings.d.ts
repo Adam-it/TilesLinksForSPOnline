@@ -17,6 +17,7 @@ declare interface IPersonalTilesWebPartStrings {
   EditPanelDeleteButton: string;
   PanelTitleValidation: string;
   PanelUrlValidation: string;
+  Loading: string;
 }
 
 declare module 'PersonalTilesWebPartStrings' {

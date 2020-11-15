@@ -7,6 +7,7 @@ import { arrayMove } from 'react-sortable-hoc';
 import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import { MSGraphClient } from "@microsoft/sp-http";
 import SortableList from '../sortableList/SortableList';
+import Loader from '../loader/Loader';
 import ToolBar from '../toolbar/ToolBar';
 import Panel from '../panelLayout/Panel';
 import { PanelPosition } from '../../model/enums/PanelPosition';
@@ -28,6 +29,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     let items = new Array();
     let itemToEdit: ITileItem = null;
     let sortingIsActive: boolean = false;
+    let isLoading: boolean = true;
     let sidePanelOpen: boolean = false;
     let panelType: PanelType = PanelType.Add;
     let tileItemsService: TileItemsService = null;
@@ -36,6 +38,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       items,
       itemToEdit,
       sortingIsActive,
+      isLoading,
       sidePanelOpen,
       panelType,
       tileItemsService
@@ -80,7 +83,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
             item,
             editTileClick: this._editTileHandle
           };
-        })
+        }),
+        isLoading: false
       });
     }
   }
@@ -95,7 +99,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
             item,
             editTileClick: this._editTileHandle
           };
-        })
+        }),
+        isLoading: false
       });
     });
   }
@@ -190,7 +195,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
   public render() {
     const { 
       items, 
-      sortingIsActive, 
+      sortingIsActive,
+      isLoading,
       sidePanelOpen,
       panelType,
       itemToEdit } = this.state;
@@ -214,6 +220,9 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
           </div>
           <div className={mainStyles.row}>
             <div className={mainStyles.columnFullWidth}>
+              <div className={!isLoading ? mainStyles.hide : null}>
+                <Loader></Loader>
+              </div>
               <div className={sortingIsActive ? sortableStyles.isSortingActive : null} >
                 <SortableList 
                   items={items} 
