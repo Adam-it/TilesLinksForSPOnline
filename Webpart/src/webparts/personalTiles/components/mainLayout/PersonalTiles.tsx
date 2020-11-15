@@ -8,6 +8,7 @@ import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import { MSGraphClient } from "@microsoft/sp-http";
 import SortableList from '../sortableList/SortableList';
 import Loader from '../loader/Loader';
+import NoItems from '../noItems/NoItems';
 import ToolBar from '../toolbar/ToolBar';
 import Panel from '../panelLayout/Panel';
 import { PanelPosition } from '../../model/enums/PanelPosition';
@@ -30,6 +31,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     let itemToEdit: ITileItem = null;
     let sortingIsActive: boolean = false;
     let isLoading: boolean = true;
+    let isEmpty: boolean = false;
     let sidePanelOpen: boolean = false;
     let panelType: PanelType = PanelType.Add;
     let tileItemsService: TileItemsService = null;
@@ -39,6 +41,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       itemToEdit,
       sortingIsActive,
       isLoading,
+      isEmpty,
       sidePanelOpen,
       panelType,
       tileItemsService
@@ -77,14 +80,16 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
           });
     }
     else{
+      let mockedTilesList = mockTiles.getTiles();
       this.setState({
-        items: mockTiles.getTiles().map((item) => {
+        items: mockedTilesList.map((item) => {
           return{
             item,
             editTileClick: this._editTileHandle
           };
         }),
-        isLoading: false
+        isLoading: false,
+        isEmpty: mockedTilesList.length === 0
       });
     }
   }
@@ -100,7 +105,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
             editTileClick: this._editTileHandle
           };
         }),
-        isLoading: false
+        isLoading: false,
+        isEmpty: appData.UserTiles.length === 0
       });
     });
   }
@@ -146,7 +152,10 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       },
       editTileClick: this._editTileHandle
     });
-    this.setState({items});
+    this.setState({
+      items,
+      isEmpty: items.length === 0
+    });
     let appData: IAppData = { UserTiles: this.state.items.map(_ => _.item) };
     this.state.tileItemsService.createOrUpdateJsonDataFile(appData);
   }
@@ -157,7 +166,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       return x.item.id != id;
     });
     this.setState({
-      items
+      items,
+      isEmpty: items.length === 0
     });
     let appData: IAppData = { UserTiles: items.map(_ => _.item) };
     this.state.tileItemsService.createOrUpdateJsonDataFile(appData);
@@ -168,7 +178,10 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     let item = items.filter(x => x.item.id === id)[0].item;
     item.value = name;
     item.url = url;
-    this.setState({items});
+    this.setState({
+      items,
+      isEmpty: items.length === 0
+    });
     let appData: IAppData = { UserTiles: this.state.items.map(_ => _.item) };
     this.state.tileItemsService.createOrUpdateJsonDataFile(appData);
   }
@@ -197,6 +210,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       items, 
       sortingIsActive,
       isLoading,
+      isEmpty,
       sidePanelOpen,
       panelType,
       itemToEdit } = this.state;
@@ -221,7 +235,10 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
           <div className={mainStyles.row}>
             <div className={mainStyles.columnFullWidth}>
               <div className={!isLoading ? mainStyles.hide : null}>
-                <Loader></Loader>
+                <Loader/>
+              </div>
+              <div className={!isEmpty ? mainStyles.hide : null}>
+                <NoItems/>
               </div>
               <div className={sortingIsActive ? sortableStyles.isSortingActive : null} >
                 <SortableList 

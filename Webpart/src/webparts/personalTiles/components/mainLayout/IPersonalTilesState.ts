@@ -11,6 +11,7 @@ export default interface IPersonalTilesState {
     itemToEdit: ITileItem;
     sortingIsActive: boolean;
     isLoading: boolean;
+    isEmpty: boolean;
     sidePanelOpen: boolean;
     panelType: PanelType;
     tileItemsService: TileItemsService;

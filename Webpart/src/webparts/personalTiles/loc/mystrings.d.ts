@@ -18,6 +18,7 @@ declare interface IPersonalTilesWebPartStrings {
   PanelTitleValidation: string;
   PanelUrlValidation: string;
   Loading: string;
+  NoItemsText: string;
 }
 
 declare module 'PersonalTilesWebPartStrings' {
