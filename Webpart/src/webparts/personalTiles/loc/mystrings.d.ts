@@ -19,6 +19,9 @@ declare interface IPersonalTilesWebPartStrings {
   PanelUrlValidation: string;
   Loading: string;
   NoItemsText: string;
+  ErrorText: string;
+  ErrorPanelRefresh: string;
+  ErrorCouldNotGetData: string;
 }
 
 declare module 'PersonalTilesWebPartStrings' {

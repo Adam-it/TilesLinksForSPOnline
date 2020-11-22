@@ -15,4 +15,6 @@ export default interface IPersonalTilesState {
     sidePanelOpen: boolean;
     panelType: PanelType;
     tileItemsService: TileItemsService;
+    isError: boolean;
+    errorDescription: string;
 }

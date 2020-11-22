@@ -21,10 +21,8 @@ export default class TileItemsService {
             .api(`/me/drive/special/approot/children?$filter=name eq '${this._appDataFolderName}'`)
             .version("v1.0")  
             .get((error, response: any, rawResponse?: any) => {
-                if (error) {  
-                    console.error(error);  
-                    resolve(null);  
-                }  
+                if (error) 
+                    resolve(error);  
 
                 resolve(response);
             }));
@@ -73,10 +71,8 @@ export default class TileItemsService {
         .api(`/me/drive/special/approot:/${this._appDataFolderName}:/children?$filter=name eq '${this._appDataJsonFileName}'`)
         .version("v1.0")  
         .get((error, response: any, rawResponse?: any) => {
-            if (error) {  
-                console.error(error);  
+            if (error)
                 return;  
-            }  
 
             let downloadUrl = response.value.filter(item => item.name === this._appDataJsonFileName)[0]["@microsoft.graph.downloadUrl"];
             this._clients   .httpClient
@@ -95,25 +91,3 @@ export default class TileItemsService {
         }));
     }
 }
-
-
-
-
- // ToDo -> the idea was to maybe have some kind of clear the app all data in configuration tab
-//   private deleteFolder(){
-//     this.state.msGraphclient
-//       .api(`/me/drive/special/approot/children?$filter=name eq 'test'`)
-//       .version("v1.0")  
-//       .get((error, response: any, rawResponse?: any) => {
-//         if (error) {  
-//           console.error(error);  
-//           return;  
-//         }  
-
-//         let id = response.value.filter(item => item.name === "test")[0].id;
-//         this.state.msGraphclient
-//         .api(`/me/drive/items/${id}`)
-//         .version("v1.0")  
-//         .delete();
-//       });
-//   }

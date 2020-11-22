@@ -19,6 +19,9 @@ define([], function() {
     "PanelTitleValidation": "title field is required",
     "PanelUrlValidation": "url field is required",
     "Loading": "Loading...",
-    "NoItemsText": "There are no items.. yet, maybe you should add some :)"
+    "NoItemsText": "There are no items.. yet, maybe you should add some :)",
+    "ErrorText": "There seems to be some error. Please try to refresh the site.",
+    "ErrorPanelRefresh": "Refresh",
+    "ErrorCouldNotGetData": "> Error - Could not get user data"
   }
 });

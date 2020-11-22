@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as strings from 'PersonalTilesWebPartStrings';
 import IPersonalTilesProps from './IPersonalTilesProps';
 import IPersonalTilesState from './IPersonalTilesState';
 import mainStyles from '../../styles/PersonalTiles.module.scss';
@@ -9,6 +10,7 @@ import { MSGraphClient } from "@microsoft/sp-http";
 import SortableList from '../sortableList/SortableList';
 import Loader from '../loader/Loader';
 import NoItems from '../noItems/NoItems';
+import ErrorPanel from '../errorPanel/ErrorPanel';
 import ToolBar from '../toolbar/ToolBar';
 import Panel from '../panelLayout/Panel';
 import { PanelPosition } from '../../model/enums/PanelPosition';
@@ -35,6 +37,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     let sidePanelOpen: boolean = false;
     let panelType: PanelType = PanelType.Add;
     let tileItemsService: TileItemsService = null;
+    let isError: boolean = false;
+    let errorDescription: string = "";
 
     this.state = { 
       items,
@@ -44,7 +48,9 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       isEmpty,
       sidePanelOpen,
       panelType,
-      tileItemsService
+      tileItemsService,
+      isError,
+      errorDescription
     };
   }
 
@@ -60,23 +66,33 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
 
             this.setState({tileItemsService: new TileItemsService(input)});
 
-            this.state.tileItemsService
-              .checkIfAppDataFolderExists()
-              .then(appDataFolderExists => {
-                if (!appDataFolderExists){
-                  this.state.tileItemsService
-                  .createAppDataFolder()
-                  .then(folderName => {
-                    if (folderName === null) {
-                      console.error("folder to store app data did not create");
-                    } else {
-                      this._LoadData();
-                    }
-                  });
-                } else {
-                  this._LoadData();
-                }
-              });
+            try {
+              this.state.tileItemsService
+                .checkIfAppDataFolderExists()
+                .then(appDataFolderExists => {
+                  if (!appDataFolderExists){
+                    this.state.tileItemsService
+                    .createAppDataFolder()
+                    .then(folderName => {
+                      if (folderName === null) {
+                        this.setState({
+                          isError: true,
+                          errorDescription: strings.ErrorCouldNotGetData
+                        });
+                      } else {
+                        this._LoadData();
+                      }
+                    });
+                  } else {
+                    this._LoadData();
+                  }
+                });
+              } catch(exception) {
+                this.setState({
+                  isError: true,
+                  errorDescription: strings.ErrorCouldNotGetData
+                });
+              }
           });
     }
     else{
@@ -98,16 +114,23 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     this.state.tileItemsService
     .getJsonAppDataFile()
     .then(appData => {
-      this.setState({
-        items: appData.UserTiles.map((item) =>{
-          return{
-            item,
-            editTileClick: this._editTileHandle
-          };
-        }),
-        isLoading: false,
-        isEmpty: appData.UserTiles.length === 0
-      });
+      if (appData === null) {
+        this.setState({
+          isError: true,
+          errorDescription: strings.ErrorCouldNotGetData
+        });
+      } else {
+        this.setState({
+          items: appData.UserTiles.map((item) =>{
+            return{
+              item,
+              editTileClick: this._editTileHandle
+            };
+          }),
+          isLoading: false,
+          isEmpty: appData.UserTiles.length === 0
+        });
+      }
     });
   }
 
@@ -213,7 +236,9 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       isEmpty,
       sidePanelOpen,
       panelType,
-      itemToEdit } = this.state;
+      itemToEdit,
+      isError,
+      errorDescription } = this.state;
 
     const { 
       webpartTitle,
@@ -234,20 +259,25 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
           </div>
           <div className={mainStyles.row}>
             <div className={mainStyles.columnFullWidth}>
-              <div className={!isLoading ? mainStyles.hide : null}>
+              <div className={!isLoading || isError ? mainStyles.hide : null}>
                 <Loader/>
               </div>
-              <div className={!isEmpty ? mainStyles.hide : null}>
-                <NoItems/>
+              <div className={!isError ? mainStyles.hide : null}>
+                <ErrorPanel errorDescription={errorDescription}/>
               </div>
-              <div className={sortingIsActive ? sortableStyles.isSortingActive : null} >
-                <SortableList 
-                  items={items} 
-                  axis="xy"
-                  helperClass={sortableStyles.sortableItemDragging}
-                  onSortEnd={this._onSortEnd}
-                  onSortStart={this._onSortStart}
-                  useDragHandle={true} />
+              <div className={isError ? mainStyles.hide : null}>
+                  <div className={!isEmpty ? mainStyles.hide : null}>
+                    <NoItems/>
+                  </div>
+                  <div className={sortingIsActive ? sortableStyles.isSortingActive : null} >
+                    <SortableList 
+                      items={items} 
+                      axis="xy"
+                      helperClass={sortableStyles.sortableItemDragging}
+                      onSortEnd={this._onSortEnd}
+                      onSortStart={this._onSortStart}
+                      useDragHandle={true} />
+                  </div>
               </div>
             </div>
           </div>
