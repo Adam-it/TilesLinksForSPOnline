@@ -6,8 +6,14 @@ import * as strings from 'PersonalTilesWebPartStrings';
 import PersonalTiles from './components/mainLayout/PersonalTiles';
 import IPersonalTilesProps from './components/mainLayout/IPersonalTilesProps';
 import IPersonalTilesWebPartProps from './IPersonalTilesWebPartProps';
+import { initializeIcons } from "office-ui-fabric-react";
 
 export default class PersonalTilesWebPart extends BaseClientSideWebPart <IPersonalTilesWebPartProps> {
+
+  public onInit(): Promise<void>{
+    initializeIcons();
+    return Promise.resolve<void>();
+  }
 
   public render(): void {
     const element: React.ReactElement<IPersonalTilesProps> = React.createElement(
