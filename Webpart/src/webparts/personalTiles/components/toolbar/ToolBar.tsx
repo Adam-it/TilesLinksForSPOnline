@@ -16,13 +16,29 @@ export default class ToolBar extends React.Component<IToolBarProps, IToolBarStat
                 iconProps: {iconName: 'Add'},
                 onClick: this.props.addHandel
             }],
-            farItems: [{
-                key: 'info',
-                text: strings.InfoButton,
-                iconOnly: true,
-                iconProps: {iconName: 'Info'}
-              }]
+            farItems: null
         };
+    }
+
+    public componentDidUpdate(){
+        const { infoText } = this.props;
+        const farItems = this.state.farItems;
+        if((infoText !== "" && farItems === null) || (farItems !== null && infoText !== farItems[0].text)) {
+            if (infoText !== ""){
+                this.setState({
+                    farItems: [{
+                        key: 'info',
+                        text: infoText,
+                        iconOnly: true,
+                        iconProps: {iconName: 'Info'}
+                    }]
+                });
+            } else {
+                this.setState({
+                    farItems: null
+                });
+            }
+        }
     }
 
     public render() {

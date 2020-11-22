@@ -1,7 +1,9 @@
 declare interface IPersonalTilesWebPartStrings {
   PropertyPaneDescription: string;
+  PropertyPaneGeneralGroupName: string;
+  PropertyPaneTitleField: string;
+  PropertyPaneInfoField: string;
   AddNewTileButton: string;
-  InfoButton: string;
   AddPanelTitle: string;
   AddPanelTileTitle: string;
   AddPanelTileUrl: string;
@@ -13,6 +15,13 @@ declare interface IPersonalTilesWebPartStrings {
   EditPanelCancelButton: string;
   EditPanelSubmitEditButton: string;
   EditPanelDeleteButton: string;
+  PanelTitleValidation: string;
+  PanelUrlValidation: string;
+  Loading: string;
+  NoItemsText: string;
+  ErrorText: string;
+  ErrorPanelRefresh: string;
+  ErrorCouldNotGetData: string;
 }
 
 declare module 'PersonalTilesWebPartStrings' {
