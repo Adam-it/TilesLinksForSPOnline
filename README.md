@@ -17,4 +17,3 @@ Sure why not. If you have ideas for new features or feedback, create an issue in
  
 ## ⚠ Disclaimer
 This code is provided as is without warranty of any kind, either express or implied, including any implied warranties of fitness for a particular purpose, merchantability, or non-infringement.
- 
