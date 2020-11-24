@@ -10,26 +10,36 @@ This webpart provides a personalized view for links. This provides an another wa
 ... please remember that if you plan to use the webpart in teams mark the 'Make this solution available to all sites in the organization' during deploy and then use the 'Sync to teams'
 ![](images/DeployTheApp.png	)
 
-## 📸 Result
+## 📸 results
 
 adding webpart to the page
 
-![](images/WhenAddingPersonalLinks.png)
+![](images/1.gif)
 
 this is how the webpart looks in SharePoint
+
 ![](images/SharePointAsWebpartOnPage.png)
 ![](images/SharePointAsWebpartOnPage2.png)
 
+this is how we may add links
+
+![](images/2.gif)
+
 and as webpart full page
+
 ![](images/SharePointAsFullPage.png)
 
 adding webpart to teams
+
 ![](images/AddingToTeamsAsTab.png)
 
 this is how the webpart will look like in teams tab
+
 ![](images/AsTeamsTab.png)
 
 teams personal app
+
+![](images/4.gif)
 ![](images/TeamsPersonalApp.png)
 ![](images/TeamsPersonalApp2.png)
 
