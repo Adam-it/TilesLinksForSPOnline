@@ -29,7 +29,7 @@ jobs:
     # npm install
     - name: Run npm ci
       run: npm ci
-      working-directory: spfx/SimpleWebpartExample/
+      working-directory: Webpart/
     
     # install gulp if mac
     - name: Run npm i -g gulp
@@ -38,7 +38,7 @@ jobs:
     
     # gulp bundle and package solution
     - name: Bundle and package
-      working-directory: spfx/SimpleWebpartExample/
+      working-directory: Webpart/
       run: |
         gulp bundle --ship
         gulp package-solution --ship    
