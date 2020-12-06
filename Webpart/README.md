@@ -29,6 +29,10 @@ and as webpart full page
 
 ![](images/SharePointAsFullPage.png)
 
+webpart supports SharePoint themes 
+
+![](images/themeSupport.png)
+
 adding webpart to teams
 
 ![](images/AddingToTeamsAsTab.png)
