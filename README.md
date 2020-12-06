@@ -11,8 +11,6 @@ This solution provides a functionality which may be added to any SharePoint page
 
 ![](Webpart/images/3.gif)
 
-![](Webpart/images/4.gif)
-
 In future I want to extend this with extensions for sites and lists that will allow to add a personal link from any point of SharePoint and with some kind of admin app (maybe some console application or other 🤔) which will allow to add not removable links for other users by the company. 
 
 This kind of solution gives an another personalized navigation for an Intranet portal which the users may create themselves. 

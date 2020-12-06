@@ -4,4 +4,5 @@ export default interface IEditPanelState {
     tileNameValidation: string;
     tileUrl: string;
     tileUrlValidation: string;
+    tileIconName: string;
 }

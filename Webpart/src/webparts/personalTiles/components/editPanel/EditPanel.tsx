@@ -4,6 +4,8 @@ import IEditPanelProps from './IEditPanelProps';
 import IEditPanelState from './IEditPanelState';
 import panelStyles from '../../styles/Panel.module.scss';
 import { Label, TextField, Stack, ActionButton, IIconProps } from 'office-ui-fabric-react';
+import { IconPicker } from '@pnp/spfx-controls-react/lib/IconPicker';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import GlobalSettings from '../../globals/GlobalSettings';
 
 export default class EditPanel extends React.Component<IEditPanelProps, IEditPanelState> {
@@ -18,7 +20,8 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
             tileName: tile.value,
             tileUrl: tile.url.replace(GlobalSettings.httpsProtocol, ""),
             tileNameValidation: "",
-            tileUrlValidation: ""
+            tileUrlValidation: "",
+            tileIconName: tile.iconName
         };
     }
 
@@ -32,7 +35,7 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
     }
 
     private _edit(): void {
-        const {tileId, tileName, tileUrl} = this.state;
+        const {tileId, tileName, tileUrl, tileIconName} = this.state;
 
         let panelIsValid: boolean = true;
         let tileNameValidation: string = "";
@@ -47,7 +50,11 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
         }
 
         if (panelIsValid){
-            this.props.onEdit(tileId, tileName, `${GlobalSettings.httpsProtocol}${tileUrl}`);
+            this.props.onEdit(
+                tileId, 
+                tileName, 
+                `${GlobalSettings.httpsProtocol}${tileUrl.replace("www.", "").replace("http://", "").replace("https://", "")}`,
+                tileIconName);
             this.props.onDismiss();
         } else {
             this.setState({
@@ -105,11 +112,12 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
             iconName: 'Delete',
             styles: deleteButtonStyle
             };
-            const {
-                tileName,
-                tileNameValidation,
-                tileUrl,
-                tileUrlValidation} = this.state;
+        const {
+            tileName,
+            tileNameValidation,
+            tileUrl,
+            tileUrlValidation,
+            tileIconName} = this.state;
 
         return(
             <div className={panelStyles.grid}>
@@ -126,6 +134,17 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
                         <Label htmlFor={textTileUrlId} required>{strings.EditPanelTileUrl}</Label>
                         <TextField id={textTileUrlId} prefix="https://" value={tileUrl} autoComplete="off" onChange={(e) => this._handleUrlChange(e)}/>
                         <Label className={panelStyles.errorLabel}>{tileUrlValidation}</Label>
+                    </div>
+                    <div className={panelStyles.columnFullWidth}>
+                        <div className={panelStyles.iconPicker}>
+                            <div className={panelStyles.iconPanel}>
+                                <Icon iconName={tileIconName} />
+                            </div>
+                            <IconPicker buttonLabel={strings.EditPanelSetIcon}
+                                renderOption={'dialog'}
+                                onChange={(iconName: string) => { this.setState({tileIconName: iconName}); }}
+                                onSave={(iconName: string) => { this.setState({tileIconName: iconName}); }} />
+                        </div>
                     </div>
                     <div className={panelStyles.columnFullWidth}>
                         <Stack horizontal className={panelStyles.buttonStack}>

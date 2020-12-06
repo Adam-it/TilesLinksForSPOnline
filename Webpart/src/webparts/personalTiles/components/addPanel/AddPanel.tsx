@@ -4,6 +4,8 @@ import IAddPanelProps from './IAddPanelProps';
 import IAddPanelState from './IAddPanelState';
 import panelStyles from '../../styles/Panel.module.scss';
 import { Label, TextField, Stack, ActionButton, IIconProps } from 'office-ui-fabric-react';
+import { IconPicker } from '@pnp/spfx-controls-react/lib/IconPicker';
+import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import GlobalSettings from '../../globals/GlobalSettings';
 
 export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelState> {
@@ -15,7 +17,8 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
             tileName: "",
             tileNameValidation: "",
             tileUrl: "",
-            tileUrlValidation: ""
+            tileUrlValidation: "",
+            tileIconName: ""
         };
     } 
 
@@ -24,7 +27,7 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
     }
 
     private _addTile(): void {
-        const {tileName, tileUrl} = this.state;
+        const {tileName, tileUrl, tileIconName} = this.state;
         
         let panelIsValid: boolean = true;
         let tileNameValidation: string = "";
@@ -39,7 +42,10 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
         }
 
         if (panelIsValid){
-            this.props.onAddNewTile(tileName, `${GlobalSettings.httpsProtocol}${tileUrl}`);
+            this.props.onAddNewTile(
+                tileName, 
+                `${GlobalSettings.httpsProtocol}${tileUrl.replace("www.", "").replace("http://", "").replace("https://", "")}`,
+                tileIconName);
             this.props.onDismiss();
         } else {
             this.setState({
@@ -84,7 +90,8 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
             tileName,
             tileNameValidation,
             tileUrl,
-            tileUrlValidation} = this.state;
+            tileUrlValidation,
+            tileIconName} = this.state;
 
         return(
             <div className={panelStyles.grid}>
@@ -101,6 +108,17 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
                         <Label htmlFor={textTileUrlId} required>{strings.AddPanelTileUrl}</Label>
                         <TextField id={textTileUrlId} prefix="https://" value={tileUrl} autoComplete="off" onChange={(e) => this._handleUrlChange(e)}/>
                         <Label className={panelStyles.errorLabel}>{tileUrlValidation}</Label>
+                    </div>
+                    <div className={panelStyles.columnFullWidth}>
+                        <div className={panelStyles.iconPicker}>
+                            <div className={panelStyles.iconPanel}>
+                                <Icon iconName={tileIconName} />
+                            </div>
+                            <IconPicker buttonLabel={strings.AddPanelSetIcon}
+                                renderOption={'dialog'}
+                                onChange={(iconName: string) => { this.setState({tileIconName: iconName}); }}
+                                onSave={(iconName: string) => { this.setState({tileIconName: iconName}); }} />
+                        </div>
                     </div>
                     <div className={panelStyles.columnFullWidth}>
                         <Stack horizontal className={panelStyles.buttonStack}>

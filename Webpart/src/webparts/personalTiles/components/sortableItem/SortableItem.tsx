@@ -13,6 +13,7 @@ export default SortableElement(({item}) => {
   let displayName = tileItem.value;
   if (displayName.length >= GlobalSettings.maxTileNameLength)
     displayName = `${displayName.substring(0, 13)}...`;
+  let hasIcon: boolean = typeof tileItem.iconName !== 'undefined' && tileItem.iconName !== "";
 
   return(
     <div className={sortableStyles.sortableItem}>
@@ -21,7 +22,8 @@ export default SortableElement(({item}) => {
       </label>
       <DragHandle />
       <a className={sortableStyles.sortableInnerItem} href={tileItem.url}>
-        {displayName}
+        <Icon iconName={tileItem.iconName} />
+        <span className={hasIcon ? "" : sortableStyles.noIcon}>{displayName}</span>
       </a>
     </div>
   );

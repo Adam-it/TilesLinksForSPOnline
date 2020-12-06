@@ -36,8 +36,11 @@ $fontFamily: "Monaco, Menlo, Consolas";
 $marginSize: 9.4px;
 $marginStep: 20px;
 
-// tiles
+// tiles -> tilePadding + tileHeight = tileSize
 $tileSize: 130px;
+$tilePadding: 35px;
+$tileHeight: 95px;
+$additionalMarginWhenNoIcon: 42px;
 
 // toolbar
 $toolBarHeight: 35px;

@@ -3,4 +3,5 @@ export default interface IAddPanelState {
     tileNameValidation: string;
     tileUrl: string;
     tileUrlValidation: string;
+    tileIconName: string;
 }
