@@ -44,16 +44,31 @@
     }
 }
 
-.sortableInnerItem {
-    display: flex;
+.sortableInnerItem{
+    display: block;
     align-items: center;
     flex-direction: row;
-    line-height: $tileSize;
+    height: $tileHeight;
+    padding-top: $tilePadding;
     justify-content: center;
+    text-align: center;
     color: $white;
     font-family: $fontFamily;
     cursor: pointer;
     text-decoration: none;
+
+    i{
+        @include ms-font-su;
+        display: block;
+    }
+
+    span{
+        display: block;
+
+        &.noIcon{
+            margin-top: $additionalMarginWhenNoIcon;
+        }
+    }
 }
 
 .sortableItemDragging{
