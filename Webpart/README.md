@@ -39,15 +39,15 @@ this is how the webpart will look like in teams tab
 
 teams personal app
 
-![](images/4.gif)
+![](images/3.gif)
 ![](images/TeamsPersonalApp.png)
 ![](images/TeamsPersonalApp2.png)
 
 ## ToDo
 #### what I want to add for this solution 🤔
 - [ ] unit tests... ye ye I know.. should have done it long ego 😅
-- [ ] github action to deploy on each push to master branch using OF 365 CLI actions
-- [ ] I want to add icons to the tiles... so that the user may add icons to personal links
+- [x] github action to deploy on each push to master branch using OF 365 CLI actions
+- [x] I want to add icons to the tiles... so that the user may add icons to personal links
 
 ## ⚠ Disclaimer
 This code is provided as is without warranty of any kind, either express or implied, including any implied warranties of fitness for a particular purpose, merchantability, or non-infringement.
