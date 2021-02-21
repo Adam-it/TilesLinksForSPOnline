@@ -1,0 +1,44 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+@import './Main.module.scss';
+
+.content {
+
+    .grid {
+        @include ms-Grid;
+
+        .row {
+            @include ms-Grid-row;
+
+            .columnFullWidth {
+                @include ms-Grid-col;
+                @include ms-sm12;
+
+                .title {
+                    @include ms-font-xl;
+                }
+
+                .errorLabel {
+                    @include ms-font-xs;
+                    color: $red;
+                }
+
+                .iconPicker{
+                    width: 60%;
+                    margin-left: auto;
+                    margin-right: auto;
+                    text-align: center;
+                }
+
+                .iconPanel{
+                    background-color: $themeLight;
+                    margin-bottom: 5px;
+                    padding: 10px 5px 10px 5px;
+                    min-height: 58px;
+                    text-align: center;
+                    @include ms-font-su;
+                    color: $themePrimary;
+                }
+            }
+        }
+    }
+}
