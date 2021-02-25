@@ -1,13 +1,15 @@
 import * as React from 'react';
 import * as strings from 'AddTileCommandSetCommandSetStrings';
-import dialogStyles from '../../../styles/Dialog.module.scss';
+import dialogStyles from '../../styles/Dialog.module.scss';
 import IAddTileDialogContentProps from './IAddTileDialogContentProps';
 import IAddTileDialogContentState from './IAddTileDialogContentState';
 import {
   PrimaryButton,
   DefaultButton,
   DialogFooter,
-  DialogContent
+  DialogContent,
+  MessageBar,
+  MessageBarType
 } from 'office-ui-fabric-react';
 import { Label, TextField } from 'office-ui-fabric-react';
 
@@ -114,6 +116,18 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
               <Label className={dialogStyles.errorLabel}>{urlValidation}</Label>
             </div>
           </div>
+          {this.props.showError ?
+            <div className={dialogStyles.row}>
+              <div className={dialogStyles.columnFullWidth}>
+                <MessageBar
+                  messageBarType={MessageBarType.error}
+                  isMultiline={false}
+                  dismissButtonAriaLabel={strings.ErrorMessageClose}>
+                    {strings.ErrorMessage}
+                </MessageBar>
+              </div>
+            </div> :
+          ''}
         </div>
       </div>
       <DialogFooter>

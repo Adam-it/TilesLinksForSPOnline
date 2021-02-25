@@ -7,6 +7,8 @@ declare interface IAddTileCommandSetCommandSetStrings {
   DialogUrlLabel: string;
   DialogNameValidation: string;
   DialogUrlValidation: string;
+  ErrorMessageClose: string
+  ErrorMessage: string
 }
 
 declare module 'AddTileCommandSetCommandSetStrings' {

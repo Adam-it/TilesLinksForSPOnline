@@ -7,6 +7,8 @@ define([], function() {
     "DialogNameLabel": "Name:",
     "DialogUrlLabel": "Url:",
     "DialogNameValidation": "name field is required",
-    "DialogUrlValidation": "url field is required"
+    "DialogUrlValidation": "url field is required",
+    "ErrorMessageClose": "Close",
+    "ErrorMessage": "Something went wrong, please try again."
   }
 });
