@@ -131,8 +131,8 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
         </div>
       </div>
       <DialogFooter>
-        <DefaultButton text={strings.DialogCancelButton} title={strings.DialogCancelButton} onClick={this.props.close} />
         <PrimaryButton text={strings.DialogSubmitButton} title={strings.DialogSubmitButton} onClick={() => this._addTile()}/>
+        <DefaultButton text={strings.DialogCancelButton} title={strings.DialogCancelButton} onClick={this.props.close} />
       </DialogFooter>
     </DialogContent>;
   }

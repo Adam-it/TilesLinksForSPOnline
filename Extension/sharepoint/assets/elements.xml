@@ -4,8 +4,24 @@
         Title="AddTileCommandSet"
         RegistrationId="100"
         RegistrationType="List"
-        Location="ClientSideExtension.ListViewCommandSet.CommandBar"
+        Location="ClientSideExtension.ListViewCommandSet"
         ClientSideComponentId="8e2e8359-3b61-4a4a-b884-8e06989596c8"
-        ClientSideComponentProperties="{&quot;sampleTextOne&quot;:&quot;One item is selected in the list.&quot;, &quot;sampleTextTwo&quot;:&quot;This command is always visible.&quot;}">
+        ClientSideComponentProperties="{&quot;AddTileCommandSet&quot;:&quot;Add Tile&quot;}">
+    </CustomAction>
+    <CustomAction
+        Title="AddTileCommandSet"
+        RegistrationId="101"
+        RegistrationType="List"
+        Location="ClientSideExtension.ListViewCommandSet"
+        ClientSideComponentId="8e2e8359-3b61-4a4a-b884-8e06989596c8"
+        ClientSideComponentProperties="{&quot;AddTileCommandSet&quot;:&quot;Add Tile&quot;}">
+    </CustomAction>
+    <CustomAction
+        Title="AddTileCommandSet"
+        RegistrationId="119"
+        RegistrationType="List"
+        Location="ClientSideExtension.ListViewCommandSet"
+        ClientSideComponentId="8e2e8359-3b61-4a4a-b884-8e06989596c8"
+        ClientSideComponentProperties="{&quot;AddTileCommandSet&quot;:&quot;Add Tile&quot;}">
     </CustomAction>
 </Elements>

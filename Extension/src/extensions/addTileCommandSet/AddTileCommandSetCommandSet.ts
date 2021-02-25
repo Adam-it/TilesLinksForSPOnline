@@ -57,11 +57,18 @@ export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<
       case 'AddTile':
         if (event.selectedRows.length >= 1) {
           const item: any = event.selectedRows[0];
+          const isFolder: boolean = item.getValueByName('FSObjType') === "1";
+          const fileType: string = item.getValueByName('File_x0020_Type');
+          const isItem: boolean = fileType === "";
+          const url: string = item.getValueByName('FileRef');
+          const namme: string = isItem && !isFolder ? item.getValueByName('Title') : item.getValueByName('FileLeafRef');
           const siteUrl: string = this.context.pageContext.web.absoluteUrl.replace(this.context.pageContext.web.serverRelativeUrl, "");
           const dialog: AddTileDialog = new AddTileDialog(
-            item.getValueByName('FileLeafRef'), 
-            item.getValueByName('FileRef'),
+            namme, 
+            url,
             siteUrl,
+            isFolder,
+            fileType,
             this._tileItemsService);
           dialog.show();
         }

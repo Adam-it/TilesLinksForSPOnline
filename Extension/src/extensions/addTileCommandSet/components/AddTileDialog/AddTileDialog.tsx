@@ -10,17 +10,23 @@ export default class AddTileDialog extends BaseDialog {
     private _siteUrl: string;
     private _tileItemsService: TileItemsService;
     private _showError: boolean;
+    private _isFolder: boolean;
+    private _fileType: string;
 
     constructor(
       itemName: string, 
       itemUrl: string, 
       siteUrl: string,
+      isFolder: boolean,
+      fileType: string,
       tileItemsService: TileItemsService) {
         super();
         this._itemName = itemName;
         this._itemUrl = itemUrl;
         this._siteUrl = siteUrl;
         this._tileItemsService = tileItemsService;
+        this._isFolder = isFolder;
+        this._fileType = fileType;
         this._showError = false;
     }
 
@@ -54,6 +60,9 @@ export default class AddTileDialog extends BaseDialog {
         name={this._itemName}
         url={url}
         showError={this._showError}
+        isFolder={this._isFolder}
+        isItem={this._fileType === ""}
+        fileType={this._fileType}
         close={this.close}
         onAddNewTile={this._onAddNewTile.bind(this)}
         />, this.domElement);
