@@ -3,4 +3,5 @@ export default interface IAddTileDialogContentState {
     nameValidation: string;
     url: string;
     urlValidation: string;
+    iconName: string;
 }

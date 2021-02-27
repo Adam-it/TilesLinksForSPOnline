@@ -17,7 +17,7 @@
 
   "items": {
     "AddTile": {
-      "title": { "default": "Add item as personal link" },
+      "title": { "default": "Add as personal link" },
       "type": "command"
     }
   }

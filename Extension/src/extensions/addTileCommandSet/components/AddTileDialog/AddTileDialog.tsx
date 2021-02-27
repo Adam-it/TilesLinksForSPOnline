@@ -45,7 +45,7 @@ export default class AddTileDialog extends BaseDialog {
               id: nextItemId,
               url,
               value: name,
-              iconName: ''
+              iconName: icon
             });
 
             this._tileItemsService.createOrUpdateJsonDataFile(appData);

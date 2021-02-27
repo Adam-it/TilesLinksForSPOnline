@@ -7,6 +7,7 @@ declare interface IAddTileCommandSetCommandSetStrings {
   DialogUrlLabel: string;
   DialogNameValidation: string;
   DialogUrlValidation: string;
+  DialogSetIcon: string;
   ErrorMessageClose: string
   ErrorMessage: string
 }

@@ -16,6 +16,7 @@
     "@microsoft/sp-core-library": "1.10.0",
     "@microsoft/sp-dialog": "1.10.0",
     "@microsoft/sp-listview-extensibility": "1.10.0",
+    "@pnp/spfx-controls-react": "2.4.0",
     "@types/es6-promise": "0.0.33",
     "@types/webpack-env": "1.13.1",
     "office-ui-fabric-react": "^7.161.0"

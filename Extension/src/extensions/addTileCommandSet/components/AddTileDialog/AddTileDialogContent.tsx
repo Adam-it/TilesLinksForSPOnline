@@ -9,9 +9,12 @@ import {
   DialogFooter,
   DialogContent,
   MessageBar,
-  MessageBarType
+  MessageBarType,
+  Label,
+  TextField,
+  Icon
 } from 'office-ui-fabric-react';
-import { Label, TextField } from 'office-ui-fabric-react';
+import { IconPicker } from '@pnp/spfx-controls-react/lib/IconPicker';
 
 export default class AddTileDialogContent extends React.Component<IAddTileDialogContentProps, IAddTileDialogContentState> {
 
@@ -26,8 +29,45 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
       name,
       url,
       nameValidation: "",
-      urlValidation: ""
+      urlValidation: "",
+      iconName: this._tryToDefineIconName()
     };
+  }
+
+  private _tryToDefineIconName(): string{
+    const {
+      isFolder,
+      isItem,
+      fileType} = this.props;
+    
+    if (isFolder) {
+      return 'FabricFolder';
+    }
+
+    if (isItem) {
+      return 'QuickNote';
+    }
+
+    switch (fileType.toLowerCase()){
+      case 'docx':
+        return 'WordDocument';
+      case 'doc':
+        return 'WordDocument';
+      case 'xlsx':
+        return 'ExcelDocument';
+      case 'xls':
+        return 'ExcelDocument';
+      case 'xlsm':
+        return 'ExcelDocument';
+      case 'pptx':
+        return 'PowerPointDocument';
+      case 'ppt':
+        return 'PowerPointDocument';
+      case 'pdf':
+        return 'PDF';
+      default:
+        return 'TextDocument';
+    }
   }
 
   private _handleTitleChange(event): void {
@@ -57,7 +97,10 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
   }
 
   private _addTile(): void {
-    const {name, url} = this.state;
+    const {
+      name, 
+      url,
+      iconName} = this.state;
     
     let panelIsValid: boolean = true;
     let tileNameValidation: string = "";
@@ -74,7 +117,8 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
     if (panelIsValid){
         this.props.onAddNewTile(
             name, 
-            `https://${url.replace("www.", "").replace("http://", "").replace("https://", "")}`);
+            `https://${url.replace("www.", "").replace("http://", "").replace("https://", "")}`,
+            iconName);
         this.props.close();
     } else {
         this.setState({
@@ -91,7 +135,8 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
       name,
       nameValidation,
       url,
-      urlValidation} = this.state;
+      urlValidation,
+      iconName } = this.state;
 
     let urlWithoutProtocol = url.replace("www.", "").replace("http://", "").replace("https://", "");
 
@@ -114,6 +159,19 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
               <Label htmlFor={textTileUrlId} required>{strings.DialogUrlLabel}</Label>
               <TextField id={textTileUrlId} prefix="https://" value={urlWithoutProtocol} autoComplete="off" onChange={(e) => this._handleUrlChange(e)}/>
               <Label className={dialogStyles.errorLabel}>{urlValidation}</Label>
+            </div>
+          </div>
+          <div className={dialogStyles.row}>
+            <div className={dialogStyles.columnFullWidth}>
+              <div className={dialogStyles.iconPicker}>
+                <div className={dialogStyles.iconPanel}>
+                    <Icon iconName={iconName} />
+                </div>
+                <IconPicker buttonLabel={strings.DialogSetIcon}
+                    renderOption={'dialog'}
+                    onChange={(iconName: string) => { this.setState({iconName}); }}
+                    onSave={(iconName: string) => { this.setState({iconName}); }} />
+              </div>
             </div>
           </div>
           {this.props.showError ?
