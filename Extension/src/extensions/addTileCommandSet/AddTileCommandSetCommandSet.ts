@@ -9,8 +9,8 @@ import {
 } from '@microsoft/sp-listview-extensibility';
 import { IAddTileCommandSetCommandSetProperties } from './IAddTileCommandSetCommandSetProperties';
 import AddTileDialog from './components/AddTileDialog/AddTileDialog';
-import TileItemsService from './services/tileItemsService/TileItemsService';
-import ITileItemsServiceInput from './model/tileItemsService/ITileItemsServiceInput';
+import TileItemsService from '../services/tileItemsService/TileItemsService';
+import ITileItemsServiceInput from '../model/tileItemsService/ITileItemsServiceInput';
 
 const LOG_SOURCE: string = 'AddTileCommandSetCommandSet';
 

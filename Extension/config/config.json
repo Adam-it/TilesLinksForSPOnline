@@ -9,11 +9,20 @@
           "manifest": "./src/extensions/addTileCommandSet/AddTileCommandSetCommandSet.manifest.json"
         }
       ]
+    },
+    "add-tile-application-customizer-application-customizer": {
+      "components": [
+        {
+          "entrypoint": "./lib/extensions/addTileApplicationCustomizer/AddTileApplicationCustomizerApplicationCustomizer.js",
+          "manifest": "./src/extensions/addTileApplicationCustomizer/AddTileApplicationCustomizerApplicationCustomizer.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "AddTileCommandSetCommandSetStrings": "lib/extensions/addTileCommandSet/loc/{locale}.js",
-    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js",
+    "AddTileApplicationCustomizerApplicationCustomizerStrings": "lib/extensions/addTileApplicationCustomizer/loc/{locale}.js"
   }
 }

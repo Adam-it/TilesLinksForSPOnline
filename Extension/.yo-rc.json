@@ -1,6 +1,6 @@
 {
   "@microsoft/generator-sharepoint": {
-    "isCreatingSolution": true,
+    "isCreatingSolution": false,
     "environment": "spo",
     "version": "1.10.0",
     "libraryName": "add-tile-button-extension",
@@ -8,6 +8,6 @@
     "packageManager": "npm",
     "isDomainIsolated": false,
     "componentType": "extension",
-    "extensionType": "ListViewCommandSet"
+    "extensionType": "ApplicationCustomizer"
   }
 }

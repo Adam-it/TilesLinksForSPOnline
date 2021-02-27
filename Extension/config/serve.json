@@ -24,6 +24,17 @@
           }
         }
       }
+    },
+    "addTileApplicationCustomizer": {
+      "pageUrl": "https://contoso.sharepoint.com/sites/mySite/SitePages/myPage.aspx",
+      "customActions": {
+        "eff44318-60cc-4897-9b10-7b1a4c23d03b": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {
+            "testMessage": "Test message"
+          }
+        }
+      }
     }
   }
 }

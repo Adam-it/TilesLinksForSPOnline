@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BaseDialog, IDialogConfiguration } from '@microsoft/sp-dialog';
 import AddTileDialogContent from './AddTileDialogContent';
-import TileItemsService from '../../services/tileItemsService/TileItemsService';
+import TileItemsService from '../../../services/tileItemsService/TileItemsService';
 
 export default class AddTileDialog extends BaseDialog {
     private _itemUrl: string;

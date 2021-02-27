@@ -169,8 +169,8 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
                 </div>
                 <IconPicker buttonLabel={strings.DialogSetIcon}
                     renderOption={'dialog'}
-                    onChange={(iconName: string) => { this.setState({iconName}); }}
-                    onSave={(iconName: string) => { this.setState({iconName}); }} />
+                    onChange={(icon: string) => { this.setState({iconName: icon}); }}
+                    onSave={(icon: string) => { this.setState({iconName: icon}); }} />
               </div>
             </div>
           </div>
