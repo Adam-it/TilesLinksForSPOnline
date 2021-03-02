@@ -1,5 +1,17 @@
 declare interface IAddTileApplicationCustomizerApplicationCustomizerStrings {
-  Title: string;
+  ButtonTitle: string;
+  DialogTitle: string;
+  DialogText: string;
+  DialogCancelButton: string;
+  DialogSubmitButton: string;
+  DialogClose: string;
+  DialogNameLabel: string;
+  DialogUrlLabel: string;
+  DialogNameValidation: string;
+  DialogUrlValidation: string;
+  DialogSetIcon: string;
+  ErrorMessageClose: string
+  ErrorMessage: string
 }
 
 declare module 'AddTileApplicationCustomizerApplicationCustomizerStrings' {

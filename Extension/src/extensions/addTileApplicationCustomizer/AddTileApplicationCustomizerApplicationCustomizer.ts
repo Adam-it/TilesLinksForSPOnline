@@ -1,39 +1,37 @@
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import { override } from '@microsoft/decorators';
-import { Log } from '@microsoft/sp-core-library';
-import {
-  BaseApplicationCustomizer
-} from '@microsoft/sp-application-base';
-import { Dialog } from '@microsoft/sp-dialog';
+import { 
+  BaseApplicationCustomizer, 
+  PlaceholderContent, 
+  PlaceholderName } from '@microsoft/sp-application-base';
+import AddTileButton from './components/AddTileButton/AddTileButton';
+import IAddTileButtonProps from './components/AddTileButton/IAddTileButtonProps';
+import IAddTileApplicationCustomizerApplicationCustomizerProperties from './IAddTileApplicationCustomizerApplicationCustomizerProperties';
 
-import * as strings from 'AddTileApplicationCustomizerApplicationCustomizerStrings';
 
-const LOG_SOURCE: string = 'AddTileApplicationCustomizerApplicationCustomizer';
-
-/**
- * If your command set uses the ClientSideComponentProperties JSON input,
- * it will be deserialized into the BaseExtension.properties object.
- * You can define an interface to describe it.
- */
-export interface IAddTileApplicationCustomizerApplicationCustomizerProperties {
-  // This is an example; replace with your own property
-  testMessage: string;
-}
-
-/** A Custom Action which can be run during execution of a Client Side Application */
-export default class AddTileApplicationCustomizerApplicationCustomizer
-  extends BaseApplicationCustomizer<IAddTileApplicationCustomizerApplicationCustomizerProperties> {
+export default class AddTileApplicationCustomizerApplicationCustomizer extends BaseApplicationCustomizer<IAddTileApplicationCustomizerApplicationCustomizerProperties> {
+  private _topPlaceholder: PlaceholderContent | undefined;
 
   @override
   public onInit(): Promise<void> {
-    Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
-
-    let message: string = this.properties.testMessage;
-    if (!message) {
-      message = '(No properties were provided.)';
-    }
-
-    Dialog.alert(`Hello from ${strings.Title}:\n\n${message}`);
-
+    this.context.placeholderProvider.changedEvent.add(this, this._renderPlaceHolders);
     return Promise.resolve();
+  }
+
+  private _renderPlaceHolders(): void {
+    if (!this._topPlaceholder) {
+      this._topPlaceholder = this.context.placeholderProvider.tryCreateContent(PlaceholderName.Top, null);
+  
+      if (!this._topPlaceholder)
+        return;
+  
+      if (this.properties) {  
+        if (this._topPlaceholder.domElement) {
+          const addTileButton: React.ReactElement<IAddTileButtonProps> = React.createElement(AddTileButton);  
+          ReactDOM.render(addTileButton, this._topPlaceholder.domElement);   
+        }
+      }
+    }
   }
 }

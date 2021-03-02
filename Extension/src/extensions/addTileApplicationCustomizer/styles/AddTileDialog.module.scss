@@ -13,10 +13,6 @@
                 @include ms-Grid-col;
                 @include ms-sm12;
 
-                .title {
-                    @include ms-font-xl;
-                }
-
                 .errorLabel {
                     @include ms-font-xs;
                     color: $red;
