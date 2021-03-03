@@ -59,6 +59,38 @@ export default class AddTileDialog extends React.Component<IAddTileDialogProps, 
         this.props.onDismiss();
     }
 
+    private _addTile(): void {
+        const {
+          name, 
+          url,
+          iconName} = this.state;
+        
+        let panelIsValid: boolean = true;
+        let tileNameValidation: string = "";
+        if (name === "") {
+            tileNameValidation = strings.DialogNameValidation;
+            panelIsValid = false;
+        }
+        let tileUrlValidation: string = "";
+        if (url === "") {
+            tileUrlValidation = strings.DialogUrlValidation;
+            panelIsValid = false;
+        }
+    
+        if (panelIsValid){
+            this.props.onAddNewTile(
+                name, 
+                `https://${url.replace("www.", "").replace("http://", "").replace("https://", "")}`,
+                iconName);
+            this.props.onDismiss();
+        } else {
+            this.setState({
+                nameValidation: tileNameValidation,
+                urlValidation: tileUrlValidation
+            });
+        }
+      }
+
     public render(): JSX.Element {
         const modelProps = { isBlocking: false };
         const dialogContentProps = {
@@ -116,20 +148,20 @@ export default class AddTileDialog extends React.Component<IAddTileDialogProps, 
                     </div>
                     {this.props.showError ?
                         <div className={dialogStyles.row}>
-                        <div className={dialogStyles.columnFullWidth}>
-                            <MessageBar
-                                messageBarType={MessageBarType.error}
-                                isMultiline={false}
-                                dismissButtonAriaLabel={strings.ErrorMessageClose}>
-                                    {strings.ErrorMessage}
-                            </MessageBar>
-                        </div>
+                            <div className={dialogStyles.columnFullWidth}>
+                                <MessageBar
+                                    messageBarType={MessageBarType.error}
+                                    isMultiline={false}
+                                    dismissButtonAriaLabel={strings.ErrorMessageClose}>
+                                        {strings.ErrorMessage}
+                                </MessageBar>
+                            </div>
                         </div> :
                     ''}
                 </div>
             </div>
             <DialogFooter>
-            <PrimaryButton text={strings.DialogSubmitButton} />
+            <PrimaryButton text={strings.DialogSubmitButton} onClick={() => this._addTile()}/>
             <DefaultButton text={strings.DialogCancelButton} onClick={() => this._handleDismiss()}/>
             </DialogFooter>
         </Dialog>);

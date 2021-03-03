@@ -40,7 +40,7 @@ export default class AddTileDialog extends BaseDialog {
             let nextItemId = appData.UserTiles.map(item => item.id).sort((a, b) => b-a)[0];
             if (!nextItemId)
               nextItemId = 0;
-
+            nextItemId = nextItemId + 1;
             appData.UserTiles.push({
               id: nextItemId,
               url,

@@ -4,4 +4,5 @@ export default interface IAddTileDialogProps {
     name: string;
     url: string;
     showError: boolean;
+    onAddNewTile?: (name:string, url:string, icon: string) => void;
 }

@@ -28,7 +28,11 @@ export default class AddTileApplicationCustomizerApplicationCustomizer extends B
   
       if (this.properties) {  
         if (this._topPlaceholder.domElement) {
-          const addTileButton: React.ReactElement<IAddTileButtonProps> = React.createElement(AddTileButton);  
+          const addTileButton: React.ReactElement<IAddTileButtonProps> = React.createElement(AddTileButton, {
+            name: document.title,
+            url: window.location.href,
+            context: this.context
+          });  
           ReactDOM.render(addTileButton, this._topPlaceholder.domElement);   
         }
       }
