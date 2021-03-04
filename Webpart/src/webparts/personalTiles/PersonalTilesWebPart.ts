@@ -1,16 +1,16 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
+import * as strings from 'PersonalTilesWebPartStrings';
 import { IPropertyPaneConfiguration, PropertyPaneTextField } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-import * as strings from 'PersonalTilesWebPartStrings';
+import { initializeIcons } from 'office-ui-fabric-react';
 import PersonalTiles from './components/mainLayout/PersonalTiles';
 import IPersonalTilesProps from './components/mainLayout/IPersonalTilesProps';
 import IPersonalTilesWebPartProps from './IPersonalTilesWebPartProps';
-import { initializeIcons } from "office-ui-fabric-react";
 
-export default class PersonalTilesWebPart extends BaseClientSideWebPart <IPersonalTilesWebPartProps> {
+export default class PersonalTilesWebPart extends BaseClientSideWebPart<IPersonalTilesWebPartProps> {
 
-  public onInit(): Promise<void>{
+  public onInit(): Promise<void> {
     initializeIcons();
     return Promise.resolve<void>();
   }
