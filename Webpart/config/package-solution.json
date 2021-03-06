@@ -3,10 +3,16 @@
   "solution": {
     "name": "personal-tiles-client-side-solution",
     "id": "13ae1b50-0c66-4f7f-b7bb-e0d5e1f6a718",
-    "version": "1.0.0.0",
+    "version": "1.0.1.0",
     "skipFeatureDeployment": true,
     "includeClientSideAssets": true,
-    "isDomainIsolated": false
+    "isDomainIsolated": false,
+    "webApiPermissionRequests": [
+      {
+        "resource": "Microsoft Graph",
+        "scope": "Sites.ReadWrite.All"
+      }
+    ]
   },
   "paths": {
     "zippedPackage": "solution/personal-tiles.sppkg"
