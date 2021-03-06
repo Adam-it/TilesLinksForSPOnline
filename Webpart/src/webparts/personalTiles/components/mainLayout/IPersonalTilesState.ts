@@ -3,8 +3,8 @@ import { PanelType } from '../../model/enums/PanelType';
 import TileItemsService from '../../services/tileItemsService/TileItemsService';
 
 export default interface IPersonalTilesState {
-    items: 
-    { 
+    items:
+    {
         item: ITileItem,
         editTileClick: any
     }[];

@@ -1,1 +1,1 @@
-export default interface ILoaderProps {}
+export default interface ILoaderProps { }

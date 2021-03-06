@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as strings from 'PersonalTilesWebPartStrings';
+import { CommandBar } from 'office-ui-fabric-react';
 import IToolBarProps from './IToolBarProps';
 import IToolBarState from './IToolBarState';
 import mainStyles from '../../styles/PersonalTiles.module.scss';
-import { CommandBar } from 'office-ui-fabric-react';
 
 export default class ToolBar extends React.Component<IToolBarProps, IToolBarState> {
 
@@ -13,24 +13,24 @@ export default class ToolBar extends React.Component<IToolBarProps, IToolBarStat
             items: [{
                 key: 'newItem',
                 text: strings.AddNewTileButton,
-                iconProps: {iconName: 'Add'},
+                iconProps: { iconName: 'Add' },
                 onClick: this.props.addHandel
             }],
             farItems: null
         };
     }
 
-    public componentDidUpdate(){
+    public componentDidUpdate() {
         const { infoText } = this.props;
         const farItems = this.state.farItems;
-        if((infoText !== "" && farItems === null) || (farItems !== null && infoText !== farItems[0].text)) {
-            if (infoText !== ""){
+        if ((infoText !== '' && farItems === null) || (farItems !== null && infoText !== farItems[0].text)) {
+            if (infoText !== '') {
                 this.setState({
                     farItems: [{
                         key: 'info',
                         text: infoText,
                         iconOnly: true,
-                        iconProps: {iconName: 'Info'}
+                        iconProps: { iconName: 'Info' }
                     }]
                 });
             } else {
@@ -42,7 +42,7 @@ export default class ToolBar extends React.Component<IToolBarProps, IToolBarStat
     }
 
     public render() {
-        return(
+        return (
             <div className={mainStyles.toolBar}>
                 <CommandBar
                     items={this.state.items}
