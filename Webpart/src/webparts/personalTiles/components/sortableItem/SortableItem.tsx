@@ -5,6 +5,7 @@ import GlobalSettings from '../../globals/GlobalSettings';
 import sortableStyles from '../../styles/Sortable.module.scss';
 
 export default SortableElement(({ item }) => {
+  // tslint:disable-next-line: variable-name
   const DragHandle = SortableHandle(() =>
     <label className={sortableStyles.moveButton}>
       <Icon iconName={'Move'} />
