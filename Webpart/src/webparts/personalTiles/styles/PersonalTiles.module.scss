@@ -1,9 +1,8 @@
-@import '~office-ui-fabric-react/dist/sass/References.scss';
-@import './Main.module.scss';
-@import './Animations.module.scss';
+@import "~office-ui-fabric-react/dist/sass/References.scss";
+@import "./Main.module.scss";
+@import "./Animations.module.scss";
 
 .personalTiles {
-
   .grid {
     @include ms-Grid;
 
@@ -18,7 +17,7 @@
           @include ms-font-xl;
         }
 
-        .panel{
+        .panel {
           @include ms-font-xl;
           margin-top: $marginStep;
           margin-left: auto;
@@ -33,7 +32,7 @@
             @include ms-font-su;
           }
 
-          .refreshButtonRow{
+          .refreshButtonRow {
             text-align: right;
             max-width: 80%;
             margin-left: auto;
@@ -43,7 +42,7 @@
             margin-top: $marginStep;
           }
 
-          .console{
+          .console {
             background-color: $black;
             color: $white;
             max-width: 80%;
@@ -64,12 +63,11 @@
   }
 
   .hide {
-    display: none
+    display: none;
   }
 
-  .toolBar{
+  .toolBar {
     padding: 0 $marginSize 0 $marginSize;
     background-color: $white;
   }
-
 }

@@ -1,1 +1,1 @@
-export default interface INoItemsProps {}
+export default interface INoItemsProps { }

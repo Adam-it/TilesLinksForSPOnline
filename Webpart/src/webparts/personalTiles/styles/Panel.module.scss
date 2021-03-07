@@ -1,7 +1,9 @@
-@import '~office-ui-fabric-react/dist/sass/References.scss';
-@import './Main.module.scss';
+@import "~office-ui-fabric-react/dist/sass/References.scss";
+@import "./Main.module.scss";
 
-:export { duration: $duration }
+:export {
+    duration: $duration;
+}
 
 .panel {
     position: absolute;
@@ -11,7 +13,7 @@
     background: $white;
     white-space: nowrap;
     overflow: hidden;
-    box-shadow: 0 0 5px 0 rgba(0,0,0,.4);
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.4);
 
     &.left {
         left: -$width;
@@ -20,7 +22,7 @@
 
         &.visible {
             left: 0px;
-        } 
+        }
     }
 
     &.right {
@@ -51,14 +53,14 @@
 
         .grid {
             @include ms-Grid;
-    
+
             .row {
                 @include ms-Grid-row;
-    
+
                 .columnFullWidth {
                     @include ms-Grid-col;
                     @include ms-sm12;
-    
+
                     .title {
                         @include ms-font-xl;
                     }
@@ -68,19 +70,19 @@
                         color: $red;
                     }
 
-                    .buttonStack{
+                    .buttonStack {
                         float: right;
                         margin-top: 20px;
                     }
 
-                    .iconPicker{
+                    .iconPicker {
                         width: 60%;
                         margin-left: auto;
                         margin-right: auto;
                         text-align: center;
                     }
 
-                    .iconPanel{
+                    .iconPanel {
                         background-color: $themeLight;
                         margin-bottom: 5px;
                         padding: 10px 5px 10px 5px;

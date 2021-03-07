@@ -1,1 +1,1 @@
-export default interface INoItemsState {}
+export default interface INoItemsState { }

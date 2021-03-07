@@ -1,1 +1,1 @@
-export default interface ILoaderState {}
+export default interface ILoaderState { }

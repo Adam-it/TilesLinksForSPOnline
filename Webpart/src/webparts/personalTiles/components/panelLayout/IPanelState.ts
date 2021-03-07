@@ -1,4 +1,4 @@
 export default interface IPanelState {
-    isOpen?: boolean;
-    isVisible?: boolean;
+    isOpen: boolean;
+    isVisible: boolean;
 }
