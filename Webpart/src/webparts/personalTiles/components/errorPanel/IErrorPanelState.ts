@@ -1,1 +1,1 @@
-export default interface IErrorPanelState {}
+export default interface IErrorPanelState { }

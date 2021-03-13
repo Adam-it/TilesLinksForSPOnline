@@ -9,6 +9,7 @@ This webpart provides a personalized view for links. This provides an another wa
 3. deploy the .sppkg file from the ..\sharepoint\solution catalog to your SharePoint tenant
 ... please remember that if you plan to use the webpart in teams mark the 'Make this solution available to all sites in the organization' during deploy and then use the 'Sync to teams'
 ![](images/DeployTheApp.png	)
+4. go to API management page and approve the Graph API permissions requested by the webpart, like described in [MSD documentation - deploy the solution and grant permissions](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/use-aad-tutorial#deploy-the-solution-and-grant-permissions)
 
 ## 📸 results
 
@@ -46,13 +47,6 @@ teams personal app
 ![](images/3.gif)
 ![](images/TeamsPersonalApp.png)
 ![](images/TeamsPersonalApp2.png)
-
-## ToDo
-#### what I want to add for this solution 🤔
-- [ ] unit tests... ye ye I know.. should have done it long ego 😅
-- [x] github action to deploy on each push to master branch using OF 365 CLI actions
-- [x] I want to add icons to the tiles... so that the user may add icons to personal links
-
 
 ## ⚠ Disclaimer
 This code is provided as is without warranty of any kind, either express or implied, including any implied warranties of fitness for a particular purpose, merchantability, or non-infringement.

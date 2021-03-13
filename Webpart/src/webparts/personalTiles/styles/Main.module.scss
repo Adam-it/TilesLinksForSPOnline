@@ -1,4 +1,4 @@
-@import '~office-ui-fabric-react/dist/sass/References.scss';
+@import "~office-ui-fabric-react/dist/sass/References.scss";
 
 // colors
 $themePrimary: "[theme: themePrimary, default: #0078d7]";
@@ -28,9 +28,6 @@ $grey: #bbb;
 $red: red;
 $primaryBackground: "[theme: primaryBackground, default: #fff]";
 $primaryText: "[theme: primaryText, default: #333]";
-
-// font
-$fontFamily: "Monaco, Menlo, Consolas";
 
 // general styling
 $marginSize: 9.4px;

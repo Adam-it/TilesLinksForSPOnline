@@ -1,5 +1,5 @@
-@import '~office-ui-fabric-react/dist/sass/References.scss';
-@import './Main.module.scss';
+@import "~office-ui-fabric-react/dist/sass/References.scss";
+@import "./Main.module.scss";
 
 .sortableContainer {
     display: flex;
@@ -9,7 +9,7 @@
     overflow: auto;
 }
 
-.isSortingActive .sortableItem label{
+.isSortingActive .sortableItem label {
     display: none !important;
 }
 
@@ -22,7 +22,7 @@
     margin: $marginSize;
     background-color: $themePrimary;
 
-    label{
+    label {
         position: absolute;
         cursor: pointer;
         top: 4px;
@@ -30,21 +30,21 @@
         display: none;
         transition: all 0.2s ease-in-out;
 
-        &.editButton{
+        &.editButton {
             right: 4px;
         }
-    
-        &.moveButton{
+
+        &.moveButton {
             right: 22px;
         }
     }
 
-    &:hover label{
+    &:hover label {
         display: block;
     }
 }
 
-.sortableInnerItem{
+.sortableInnerItem {
     display: block;
     align-items: center;
     flex-direction: row;
@@ -53,24 +53,23 @@
     justify-content: center;
     text-align: center;
     color: $white;
-    font-family: $fontFamily;
     cursor: pointer;
     text-decoration: none;
 
-    i{
+    i {
         @include ms-font-su;
         display: block;
     }
 
-    span{
+    span {
         display: block;
 
-        &.noIcon{
+        &.noIcon {
             margin-top: $additionalMarginWhenNoIcon;
         }
     }
 }
 
-.sortableItemDragging{
+.sortableItemDragging {
     box-shadow: 0 0 $marginSize $neutralPrimary;
 }

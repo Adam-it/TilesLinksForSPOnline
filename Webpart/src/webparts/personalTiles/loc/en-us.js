@@ -1,4 +1,4 @@
-define([], function() {
+define([], function () {
   return {
     "PropertyPaneDescription": "Setup webpart configuration",
     "PropertyPaneGeneralGroupName": "General settings",

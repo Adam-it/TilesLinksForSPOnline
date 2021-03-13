@@ -1,5 +1,5 @@
 import ITileItem from './ITileItem';
 
-export default interface IAppData{
-    UserTiles: ITileItem[];
+export default interface IAppData {
+    userTiles: ITileItem[];
 }
