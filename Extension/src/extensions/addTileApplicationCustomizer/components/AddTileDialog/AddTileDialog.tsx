@@ -15,45 +15,47 @@ export default class AddTileDialog extends React.Component<IAddTileDialogProps, 
 
     constructor(props) {
         super(props);
-    
+
         const {
-          name,
-          url} = this.props;
-    
+            name,
+            url } = this.props;
+
         this.state = {
-          name,
-          url,
-          nameValidation: "",
-          urlValidation: "",
-          iconName: 'FileASPX'
+            name,
+            url,
+            nameValidation: '',
+            urlValidation: '',
+            iconName: 'FileASPX'
         };
     }
 
     private _handleTitleChange(event): void {
         const title = event.target.value;
-        
-        let validation = "";
-        if (title === "")
+
+        let validation = '';
+        if (title === '') {
             validation = strings.DialogNameValidation;
-    
+        }
+
         this.setState({
             name: title,
             nameValidation: validation
         });
-      }
-    
-      private _handleUrlChange(event): void {
+    }
+
+    private _handleUrlChange(event): void {
         const url = event.target.value;
-    
-        let validation = "";
-        if (url === "")
+
+        let validation = '';
+        if (url === '') {
             validation = strings.DialogUrlValidation;
-    
+        }
+
         this.setState({
             url: url,
             urlValidation: validation
         });
-      }
+    }
 
     private _handleDismiss(): void {
         this.props.onDismiss();
@@ -61,26 +63,26 @@ export default class AddTileDialog extends React.Component<IAddTileDialogProps, 
 
     private _addTile(): void {
         const {
-          name, 
-          url,
-          iconName} = this.state;
-        
+            name,
+            url,
+            iconName } = this.state;
+
         let panelIsValid: boolean = true;
-        let tileNameValidation: string = "";
-        if (name === "") {
+        let tileNameValidation: string = '';
+        if (name === '') {
             tileNameValidation = strings.DialogNameValidation;
             panelIsValid = false;
         }
-        let tileUrlValidation: string = "";
-        if (url === "") {
+        let tileUrlValidation: string = '';
+        if (url === '') {
             tileUrlValidation = strings.DialogUrlValidation;
             panelIsValid = false;
         }
-    
-        if (panelIsValid){
+
+        if (panelIsValid) {
             this.props.onAddNewTile(
-                name, 
-                `https://${url.replace("www.", "").replace("http://", "").replace("https://", "")}`,
+                name,
+                `https://${url.replace('www.', '').replace('http://', '').replace('https://', '')}`,
                 iconName);
             this.props.onDismiss();
         } else {
@@ -89,7 +91,7 @@ export default class AddTileDialog extends React.Component<IAddTileDialogProps, 
                 urlValidation: tileUrlValidation
             });
         }
-      }
+    }
 
     public render(): JSX.Element {
         const modelProps = { isBlocking: false };
@@ -100,70 +102,70 @@ export default class AddTileDialog extends React.Component<IAddTileDialogProps, 
             subText: strings.DialogText,
             showCloseButton: true
         };
-        const textTileNameId: string = "textTileNameId";
-        const textTileUrlId: string = "textTileUrlId";
+        const textTileNameId: string = 'textTileNameId';
+        const textTileUrlId: string = 'textTileUrlId';
         const {
             name,
             nameValidation,
             url,
             urlValidation,
             iconName } = this.state;
-      
-          let urlWithoutProtocol = url.replace("www.", "").replace("http://", "").replace("https://", "");
+
+        const urlWithoutProtocol = url.replace('www.', '').replace('http://', '').replace('https://', '');
 
         return (
-        <Dialog
-            hidden={!this.props.showDialog}
-            onDismiss={() => this._handleDismiss()}
-            dialogContentProps={dialogContentProps}
-            modalProps={modelProps}>
-            <div className={dialogStyles.content}>
-                <div className={dialogStyles.grid}>
-                    <div className={dialogStyles.row}>
-                        <div className={dialogStyles.columnFullWidth}>
-                            <Label htmlFor={textTileNameId} required>{strings.DialogNameLabel}</Label>
-                            <TextField id={textTileNameId} value={name} autoComplete="off" onChange={(e) => this._handleTitleChange(e)}/>
-                            <Label className={dialogStyles.errorLabel}>{nameValidation}</Label>
-                        </div>
-                    </div>
-                    <div className={dialogStyles.row}>
-                        <div className={dialogStyles.columnFullWidth}>
-                            <Label htmlFor={textTileUrlId} required>{strings.DialogUrlLabel}</Label>
-                            <TextField id={textTileUrlId} prefix="https://" value={urlWithoutProtocol} autoComplete="off" onChange={(e) => this._handleUrlChange(e)}/>
-                            <Label className={dialogStyles.errorLabel}>{urlValidation}</Label>
-                        </div>
-                    </div>
-                    <div className={dialogStyles.row}>
-                        <div className={dialogStyles.columnFullWidth}>
-                        <div className={dialogStyles.iconPicker}>
-                            <div className={dialogStyles.iconPanel}>
-                                <Icon iconName={iconName} />
-                            </div>
-                            <IconPicker buttonLabel={strings.DialogSetIcon}
-                                renderOption={'dialog'}
-                                onChange={(icon: string) => { this.setState({iconName: icon}); }}
-                                onSave={(icon: string) => { this.setState({iconName: icon}); }} />
-                        </div>
-                        </div>
-                    </div>
-                    {this.props.showError ?
+            <Dialog
+                hidden={!this.props.showDialog}
+                onDismiss={() => this._handleDismiss()}
+                dialogContentProps={dialogContentProps}
+                modalProps={modelProps}>
+                <div className={dialogStyles.content}>
+                    <div className={dialogStyles.grid}>
                         <div className={dialogStyles.row}>
                             <div className={dialogStyles.columnFullWidth}>
-                                <MessageBar
-                                    messageBarType={MessageBarType.error}
-                                    isMultiline={false}
-                                    dismissButtonAriaLabel={strings.ErrorMessageClose}>
-                                        {strings.ErrorMessage}
-                                </MessageBar>
+                                <Label htmlFor={textTileNameId} required>{strings.DialogNameLabel}</Label>
+                                <TextField id={textTileNameId} value={name} autoComplete='off' onChange={(e) => this._handleTitleChange(e)} />
+                                <Label className={dialogStyles.errorLabel}>{nameValidation}</Label>
                             </div>
-                        </div> :
-                    ''}
+                        </div>
+                        <div className={dialogStyles.row}>
+                            <div className={dialogStyles.columnFullWidth}>
+                                <Label htmlFor={textTileUrlId} required>{strings.DialogUrlLabel}</Label>
+                                <TextField id={textTileUrlId} prefix='https://' value={urlWithoutProtocol} autoComplete='off' onChange={(e) => this._handleUrlChange(e)} />
+                                <Label className={dialogStyles.errorLabel}>{urlValidation}</Label>
+                            </div>
+                        </div>
+                        <div className={dialogStyles.row}>
+                            <div className={dialogStyles.columnFullWidth}>
+                                <div className={dialogStyles.iconPicker}>
+                                    <div className={dialogStyles.iconPanel}>
+                                        <Icon iconName={iconName} />
+                                    </div>
+                                    <IconPicker buttonLabel={strings.DialogSetIcon}
+                                        renderOption={'dialog'}
+                                        onChange={(icon: string) => { this.setState({ iconName: icon }); }}
+                                        onSave={(icon: string) => { this.setState({ iconName: icon }); }} />
+                                </div>
+                            </div>
+                        </div>
+                        {this.props.showError ?
+                            <div className={dialogStyles.row}>
+                                <div className={dialogStyles.columnFullWidth}>
+                                    <MessageBar
+                                        messageBarType={MessageBarType.error}
+                                        isMultiline={false}
+                                        dismissButtonAriaLabel={strings.ErrorMessageClose}>
+                                        {strings.ErrorMessage}
+                                    </MessageBar>
+                                </div>
+                            </div> :
+                            ''}
+                    </div>
                 </div>
-            </div>
-            <DialogFooter>
-            <PrimaryButton text={strings.DialogSubmitButton} onClick={() => this._addTile()}/>
-            <DefaultButton text={strings.DialogCancelButton} onClick={() => this._handleDismiss()}/>
-            </DialogFooter>
-        </Dialog>);
+                <DialogFooter>
+                    <PrimaryButton text={strings.DialogSubmitButton} onClick={() => this._addTile()} />
+                    <DefaultButton text={strings.DialogCancelButton} onClick={() => this._handleDismiss()} />
+                </DialogFooter>
+            </Dialog>);
     }
 }

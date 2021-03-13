@@ -1,6 +1,6 @@
 import { override } from '@microsoft/decorators';
 import { Log } from '@microsoft/sp-core-library';
-import { MSGraphClient } from "@microsoft/sp-http";
+import { MSGraphClient } from '@microsoft/sp-http';
 import {
   BaseListViewCommandSet,
   Command,
@@ -15,7 +15,7 @@ import ITileItemsServiceInput from '../model/tileItemsService/ITileItemsServiceI
 const LOG_SOURCE: string = 'AddTileCommandSetCommandSet';
 
 export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<IAddTileCommandSetCommandSetProperties> {
-  private _tileItemsService: TileItemsService;
+  private tileItemsService: TileItemsService;
 
 
   @override
@@ -24,22 +24,22 @@ export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<
     this.context.msGraphClientFactory
       .getClient()
       .then((client: MSGraphClient): void => {
-        let input: ITileItemsServiceInput = {
+        const input: ITileItemsServiceInput = {
           httpClient: this.context.httpClient,
           mSGraphClient: client
         };
 
-        this._tileItemsService = new TileItemsService(input);
+        this.tileItemsService = new TileItemsService(input);
 
-        this._tileItemsService
-            .checkIfAppDataFolderExists()
-            .then(appDataFolderExists => {
-              if (!appDataFolderExists){
-                this._tileItemsService.createAppDataFolder();
-              }
-            });
+        this.tileItemsService
+          .checkIfAppDataFolderExists()
+          .then(appDataFolderExists => {
+            if (!appDataFolderExists) {
+              this.tileItemsService.createAppDataFolder();
+            }
+          });
       });
-        
+
     return Promise.resolve();
   }
 
@@ -57,19 +57,19 @@ export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<
       case 'AddTile':
         if (event.selectedRows.length >= 1) {
           const item: any = event.selectedRows[0];
-          const isFolder: boolean = item.getValueByName('FSObjType') === "1";
+          const isFolder: boolean = item.getValueByName('FSObjType') === '1';
           const fileType: string = item.getValueByName('File_x0020_Type');
-          const isItem: boolean = fileType === "";
+          const isItem: boolean = fileType === '';
           const url: string = item.getValueByName('FileRef');
           const namme: string = isItem && !isFolder ? item.getValueByName('Title') : item.getValueByName('FileLeafRef');
-          const siteUrl: string = this.context.pageContext.web.absoluteUrl.replace(this.context.pageContext.web.serverRelativeUrl, "");
+          const siteUrl: string = this.context.pageContext.web.absoluteUrl.replace(this.context.pageContext.web.serverRelativeUrl, '');
           const dialog: AddTileDialog = new AddTileDialog(
-            namme, 
+            namme,
             url,
             siteUrl,
             isFolder,
             fileType,
-            this._tileItemsService);
+            this.tileItemsService);
           dialog.show();
         }
         break;

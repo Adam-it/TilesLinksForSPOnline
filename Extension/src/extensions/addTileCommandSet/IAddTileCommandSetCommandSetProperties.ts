@@ -1,1 +1,1 @@
-export interface IAddTileCommandSetCommandSetProperties {}
+export interface IAddTileCommandSetCommandSetProperties { }

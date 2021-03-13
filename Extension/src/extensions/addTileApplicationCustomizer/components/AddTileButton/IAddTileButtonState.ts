@@ -1,4 +1,4 @@
-import TileItemsService from "../../../services/tileItemsService/TileItemsService";
+import TileItemsService from '../../../services/tileItemsService/TileItemsService';
 
 export default interface IAddTileButtonState {
     showDialog: boolean;

@@ -23,23 +23,23 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
 
     const {
       name,
-      url} = this.props;
+      url } = this.props;
 
     this.state = {
       name,
       url,
-      nameValidation: "",
-      urlValidation: "",
+      nameValidation: '',
+      urlValidation: '',
       iconName: this._tryToDefineIconName()
     };
   }
 
-  private _tryToDefineIconName(): string{
+  private _tryToDefineIconName(): string {
     const {
       isFolder,
       isItem,
-      fileType} = this.props;
-    
+      fileType } = this.props;
+
     if (isFolder) {
       return 'FabricFolder';
     }
@@ -48,7 +48,7 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
       return 'QuickNote';
     }
 
-    switch (fileType.toLowerCase()){
+    switch (fileType.toLowerCase()) {
       case 'docx':
         return 'WordDocument';
       case 'doc':
@@ -72,65 +72,67 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
 
   private _handleTitleChange(event): void {
     const title = event.target.value;
-    
-    let validation = "";
-    if (title === "")
-        validation = strings.DialogNameValidation;
+
+    let validation = '';
+    if (title === '') {
+      validation = strings.DialogNameValidation;
+    }
 
     this.setState({
-        name: title,
-        nameValidation: validation
+      name: title,
+      nameValidation: validation
     });
   }
 
   private _handleUrlChange(event): void {
     const url = event.target.value;
 
-    let validation = "";
-    if (url === "")
-        validation = strings.DialogUrlValidation;
+    let validation = '';
+    if (url === '') {
+      validation = strings.DialogUrlValidation;
+    }
 
     this.setState({
-        url: url,
-        urlValidation: validation
+      url: url,
+      urlValidation: validation
     });
   }
 
   private _addTile(): void {
     const {
-      name, 
+      name,
       url,
-      iconName} = this.state;
-    
+      iconName } = this.state;
+
     let panelIsValid: boolean = true;
-    let tileNameValidation: string = "";
-    if (name === "") {
-        tileNameValidation = strings.DialogNameValidation;
-        panelIsValid = false;
+    let tileNameValidation: string = '';
+    if (name === '') {
+      tileNameValidation = strings.DialogNameValidation;
+      panelIsValid = false;
     }
-    let tileUrlValidation: string = "";
-    if (url === "") {
-        tileUrlValidation = strings.DialogUrlValidation;
-        panelIsValid = false;
+    let tileUrlValidation: string = '';
+    if (url === '') {
+      tileUrlValidation = strings.DialogUrlValidation;
+      panelIsValid = false;
     }
 
-    if (panelIsValid){
-        this.props.onAddNewTile(
-            name, 
-            `https://${url.replace("www.", "").replace("http://", "").replace("https://", "")}`,
-            iconName);
-        this.props.close();
+    if (panelIsValid) {
+      this.props.onAddNewTile(
+        name,
+        `https://${url.replace('www.', '').replace('http://', '').replace('https://', '')}`,
+        iconName);
+      this.props.close();
     } else {
-        this.setState({
-            nameValidation: tileNameValidation,
-            urlValidation: tileUrlValidation
-        });
+      this.setState({
+        nameValidation: tileNameValidation,
+        urlValidation: tileUrlValidation
+      });
     }
   }
 
   public render(): JSX.Element {
-    const textTileNameId: string = "textTileNameId";
-    const textTileUrlId: string = "textTileUrlId";
+    const textTileNameId: string = 'textTileNameId';
+    const textTileUrlId: string = 'textTileUrlId';
     const {
       name,
       nameValidation,
@@ -138,7 +140,7 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
       urlValidation,
       iconName } = this.state;
 
-    let urlWithoutProtocol = url.replace("www.", "").replace("http://", "").replace("https://", "");
+    const urlWithoutProtocol = url.replace('www.', '').replace('http://', '').replace('https://', '');
 
     return <DialogContent
       title={strings.DialogTitle}
@@ -150,14 +152,14 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
           <div className={dialogStyles.row}>
             <div className={dialogStyles.columnFullWidth}>
               <Label htmlFor={textTileNameId} required>{strings.DialogNameLabel}</Label>
-              <TextField id={textTileNameId} value={name} autoComplete="off" onChange={(e) => this._handleTitleChange(e)}/>
+              <TextField id={textTileNameId} value={name} autoComplete='off' onChange={(e) => this._handleTitleChange(e)} />
               <Label className={dialogStyles.errorLabel}>{nameValidation}</Label>
             </div>
           </div>
           <div className={dialogStyles.row}>
             <div className={dialogStyles.columnFullWidth}>
               <Label htmlFor={textTileUrlId} required>{strings.DialogUrlLabel}</Label>
-              <TextField id={textTileUrlId} prefix="https://" value={urlWithoutProtocol} autoComplete="off" onChange={(e) => this._handleUrlChange(e)}/>
+              <TextField id={textTileUrlId} prefix='https://' value={urlWithoutProtocol} autoComplete='off' onChange={(e) => this._handleUrlChange(e)} />
               <Label className={dialogStyles.errorLabel}>{urlValidation}</Label>
             </div>
           </div>
@@ -165,12 +167,12 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
             <div className={dialogStyles.columnFullWidth}>
               <div className={dialogStyles.iconPicker}>
                 <div className={dialogStyles.iconPanel}>
-                    <Icon iconName={iconName} />
+                  <Icon iconName={iconName} />
                 </div>
                 <IconPicker buttonLabel={strings.DialogSetIcon}
-                    renderOption={'dialog'}
-                    onChange={(icon: string) => { this.setState({iconName: icon}); }}
-                    onSave={(icon: string) => { this.setState({iconName: icon}); }} />
+                  renderOption={'dialog'}
+                  onChange={(icon: string) => { this.setState({ iconName: icon }); }}
+                  onSave={(icon: string) => { this.setState({ iconName: icon }); }} />
               </div>
             </div>
           </div>
@@ -181,15 +183,15 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
                   messageBarType={MessageBarType.error}
                   isMultiline={false}
                   dismissButtonAriaLabel={strings.ErrorMessageClose}>
-                    {strings.ErrorMessage}
+                  {strings.ErrorMessage}
                 </MessageBar>
               </div>
             </div> :
-          ''}
+            ''}
         </div>
       </div>
       <DialogFooter>
-        <PrimaryButton text={strings.DialogSubmitButton} title={strings.DialogSubmitButton} onClick={() => this._addTile()}/>
+        <PrimaryButton text={strings.DialogSubmitButton} title={strings.DialogSubmitButton} onClick={() => this._addTile()} />
         <DefaultButton text={strings.DialogCancelButton} title={strings.DialogCancelButton} onClick={this.props.close} />
       </DialogFooter>
     </DialogContent>;

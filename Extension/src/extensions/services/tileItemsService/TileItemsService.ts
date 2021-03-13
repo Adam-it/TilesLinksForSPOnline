@@ -5,89 +5,92 @@ import IAppData from '../../model/IAppData';
 
 export default class TileItemsService {
 
-    private _clients: ITileItemsServiceInput = null;
-    private _appDataFolderName: string = null;
-    private _appDataJsonFileName: string = null;
+    private clients: ITileItemsServiceInput = null;
+    private appDataFolderName: string = null;
+    private appDataJsonFileName: string = null;
 
     constructor(input: ITileItemsServiceInput) {
-        this._clients = input;
-        this._appDataFolderName = GlobalSettings.appDataFolderName;
-        this._appDataJsonFileName = GlobalSettings.appDataJsonFileName;
+        this.clients = input;
+        this.appDataFolderName = GlobalSettings.appDataFolderName;
+        this.appDataJsonFileName = GlobalSettings.appDataJsonFileName;
     }
 
     public async getAppDataFolder(): Promise<any> {
-        return new Promise<any>((resolve, reject) => 
-        this._clients.mSGraphClient
-            .api(`/me/drive/special/approot/children?$filter=name eq '${this._appDataFolderName}'`)
-            .version("v1.0")  
-            .get((error, response: any, rawResponse?: any) => {
-                if (error) 
-                    resolve(error);  
+        return new Promise<any>((resolve, reject) =>
+            this.clients.mSGraphClient
+                .api(`/me/drive/special/approot/children?$filter=name eq '${this.appDataFolderName}'`)
+                .version('v1.0')
+                .get((error, response: any, rawResponse?: any) => {
+                    if (error) {
+                        resolve(error);
+                    }
 
-                resolve(response);
-            }));
+                    resolve(response);
+                }));
     }
 
     public async checkIfAppDataFolderExists(): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
-            resolve(this.getAppDataFolder().then(result => result.value.some(item => item.name === this._appDataFolderName)));
+            resolve(this.getAppDataFolder().then(result => result.value.some(item => item.name === this.appDataFolderName)));
         });
     }
 
     public async createAppDataFolder(): Promise<string> {
         const driveItem = {
-            name: this._appDataFolderName,
-            folder: { },
-            "@microsoft.graph.conflictBehavior":"fail"
+            name: this.appDataFolderName,
+            folder: {},
+            '@microsoft.graph.conflictBehavior': 'fail'
         };
-    
-        return new Promise<string>((resolve, reject) => 
-        this._clients.mSGraphClient
-            .api('/me/drive/special/approot/children')
-            .version("v1.0")  
-            .post(driveItem)
-            .then(result => {
-                if (result != null)
-                    resolve(result.name.toString());
-            }));
+
+        return new Promise<string>((resolve, reject) =>
+            this.clients.mSGraphClient
+                .api('/me/drive/special/approot/children')
+                .version('v1.0')
+                .post(driveItem)
+                .then(result => {
+                    if (result != null) {
+                        resolve(result.name.toString());
+                    }
+                }));
     }
-    
+
     public createOrUpdateJsonDataFile(appData: IAppData): void {
         this.getAppDataFolder()
-        .then(response => {
-            let id = response.value.filter(item => item.name === this._appDataFolderName)[0].id;
-            const stream = JSON.stringify(appData);
+            .then(response => {
+                const id = response.value.filter(item => item.name === this.appDataFolderName)[0].id;
+                const stream = JSON.stringify(appData);
 
-            this._clients.mSGraphClient
-                .api(`/me/drive/items/${id}:/${this._appDataJsonFileName}:/content`)
-                .version("v1.0")  
-                .put(stream);
-        });
-    }
-    
-    public async getJsonAppDataFile(): Promise<IAppData>{
-        return new Promise<IAppData>((resolve, reject) => 
-        this._clients.mSGraphClient
-        .api(`/me/drive/special/approot:/${this._appDataFolderName}:/children?$filter=name eq '${this._appDataJsonFileName}'`)
-        .version("v1.0")  
-        .get((error, response: any, rawResponse?: any) => {
-            if (error)
-                return;  
-
-            let downloadUrl = response.value.filter(item => item.name === this._appDataJsonFileName)[0]["@microsoft.graph.downloadUrl"];
-            this._clients   .httpClient
-            .get(downloadUrl, HttpClient.configurations.v1)
-            .then((innerResponse: HttpClientResponse): Promise<string> => {
-                if (innerResponse.ok) {
-                    return innerResponse.text();
-                }
-            
-                    return Promise.reject(innerResponse.statusText);
-            })
-            .then((settingsString: string) => {
-                const settings: IAppData = JSON.parse(settingsString);
-                resolve(settings);
+                this.clients.mSGraphClient
+                    .api(`/me/drive/items/${id}:/${this.appDataJsonFileName}:/content`)
+                    .version('v1.0')
+                    .put(stream);
             });
-        }));
+    }
+
+    public async getJsonAppDataFile(): Promise<IAppData> {
+        return new Promise<IAppData>((resolve, reject) =>
+            this.clients.mSGraphClient
+                .api(`/me/drive/special/approot:/${this.appDataFolderName}:/children?$filter=name eq '${this.appDataJsonFileName}'`)
+                .version('v1.0')
+                .get((error, response: any, rawResponse?: any) => {
+                    if (error) {
+                        return;
+                    }
+
+                    const downloadUrl = response.value.filter(item => item.name === this.appDataJsonFileName)[0]['@microsoft.graph.downloadUrl'];
+                    this.clients.httpClient
+                        .get(downloadUrl, HttpClient.configurations.v1)
+                        .then((innerResponse: HttpClientResponse): Promise<string> => {
+                            if (innerResponse.ok) {
+                                return innerResponse.text();
+                            }
+
+                            return Promise.reject(innerResponse.statusText);
+                        })
+                        .then((settingsString: string) => {
+                            const settings: IAppData = JSON.parse(settingsString);
+                            resolve(settings);
+                        });
+                }));
     }
 }
