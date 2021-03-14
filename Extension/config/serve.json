@@ -1,0 +1,38 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+  "port": 4321,
+  "https": true,
+  "serveConfigurations": {
+    "default": {
+      "pageUrl": "https://tenanttocheck.sharepoint.com/sites/DevSite/Shared%20Documents/Forms/AllItems.aspx",
+      "customActions": {
+        "8e2e8359-3b61-4a4a-b884-8e06989596c8": {
+          "location": "ClientSideExtension.ListViewCommandSet",
+          "properties": {
+            "sampleTextOne": "Add personal link for this item"
+          }
+        }
+      }
+    },
+    "addTileCommandSet": {
+      "pageUrl": "https://tenanttocheck.sharepoint.com/sites/DevSite/Shared%20Documents/Forms/AllItems.aspx",
+      "customActions": {
+        "8e2e8359-3b61-4a4a-b884-8e06989596c8": {
+          "location": "ClientSideExtension.ListViewCommandSet",
+          "properties": {
+            "sampleTextOne": "Add personal link for this item"
+          }
+        }
+      }
+    },
+    "addTileApplicationCustomizer": {
+      "pageUrl": "https://tenanttocheck.sharepoint.com/sites/DevSite/SitePages/TestTiles.aspx",
+      "customActions": {
+        "eff44318-60cc-4897-9b10-7b1a4c23d03b": {
+          "location": "ClientSideExtension.ApplicationCustomizer",
+          "properties": {}
+        }
+      }
+    }
+  }
+}

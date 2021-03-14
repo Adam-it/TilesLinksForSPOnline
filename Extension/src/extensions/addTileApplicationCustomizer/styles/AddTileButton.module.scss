@@ -1,0 +1,23 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+@import '../../styles/Main.module.scss';
+
+.content {
+
+    .grid {
+        @include ms-Grid;
+
+        .row {
+            @include ms-Grid-row;
+
+            .columnFullWidth {
+                @include ms-Grid-col;
+                @include ms-sm12;
+                background-color: $neutralLight;
+                text-align: right;
+                padding-top: 5px;
+                padding-bottom: 5px;
+                padding-right: 15px;
+            }
+        }
+    }
+}
