@@ -10,7 +10,6 @@ import AddTileButton from './components/AddTileButton/AddTileButton';
 import IAddTileButtonProps from './components/AddTileButton/IAddTileButtonProps';
 import IAddTileApplicationCustomizerApplicationCustomizerProperties from './IAddTileApplicationCustomizerApplicationCustomizerProperties';
 
-
 export default class AddTileApplicationCustomizerApplicationCustomizer extends BaseApplicationCustomizer<IAddTileApplicationCustomizerApplicationCustomizerProperties> {
   private topPlaceholder: PlaceholderContent | undefined;
 
@@ -31,8 +30,8 @@ export default class AddTileApplicationCustomizerApplicationCustomizer extends B
       if (this.properties) {
         if (this.topPlaceholder.domElement) {
           const addTileButton: React.ReactElement<IAddTileButtonProps> = React.createElement(AddTileButton, {
-            name: document.title,
-            url: window.location.href,
+            name: document.title !== 'undefined' ? document.title : '',
+            url: window.location.href !== 'undefined' ? window.location.href : '',
             context: this.context
           });
           ReactDOM.render(addTileButton, this.topPlaceholder.domElement);

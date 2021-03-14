@@ -1,1 +1,1 @@
-export default interface IAddTileApplicationCustomizerApplicationCustomizerProperties {}
+export default interface IAddTileApplicationCustomizerApplicationCustomizerProperties { }

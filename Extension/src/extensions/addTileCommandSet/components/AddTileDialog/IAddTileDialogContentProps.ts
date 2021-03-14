@@ -6,5 +6,5 @@ export default interface IAddTileDialogContentProps {
     isItem: boolean;
     fileType: string;
     close: () => void;
-    onAddNewTile?: (name: string, url: string, icon: string) => void;
+    onAddNewTile: (name: string, url: string, icon: string) => void;
 }

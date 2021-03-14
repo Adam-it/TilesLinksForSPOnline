@@ -12,15 +12,11 @@ import AddTileDialog from './components/AddTileDialog/AddTileDialog';
 import TileItemsService from '../services/tileItemsService/TileItemsService';
 import ITileItemsServiceInput from '../model/tileItemsService/ITileItemsServiceInput';
 
-const LOG_SOURCE: string = 'AddTileCommandSetCommandSet';
-
 export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<IAddTileCommandSetCommandSetProperties> {
   private tileItemsService: TileItemsService;
 
-
   @override
   public onInit(): Promise<void> {
-    Log.info(LOG_SOURCE, 'Initialized AddTileCommandSetCommandSet');
     this.context.msGraphClientFactory
       .getClient()
       .then((client: MSGraphClient): void => {

@@ -30,33 +30,8 @@ export default class AddTileDialog extends BaseDialog {
     this.showError = false;
   }
 
-  private onAddNewTile(name: string, url: string, icon: string): void {
-    this.tileItemsService
-      .getJsonAppDataFile()
-      .then(appData => {
-        if (appData === null) {
-          this.showError = true;
-        } else {
-          let nextItemId = appData.UserTiles.map(item => item.id).sort((a, b) => b - a)[0];
-          if (!nextItemId) {
-            nextItemId = 0;
-          }
-          nextItemId = nextItemId + 1;
-          appData.UserTiles.push({
-            id: nextItemId,
-            url,
-            value: name,
-            iconName: icon
-          });
-
-          this.tileItemsService.createOrUpdateJsonDataFile(appData);
-          this.close();
-        }
-      });
-  }
-
   public render(): void {
-    const url: string = this.siteUrl + this.itemUrl;
+    const url: string = `${this.siteUrl}${this.itemUrl}`;
     ReactDOM.render(<AddTileDialogContent
       name={this.itemName}
       url={url}
@@ -73,5 +48,30 @@ export default class AddTileDialog extends BaseDialog {
     return {
       isBlocking: false
     };
+  }
+
+  private onAddNewTile(name: string, url: string, icon: string): void {
+    this.tileItemsService
+      .getJsonAppDataFile()
+      .then(appData => {
+        if (appData === null) {
+          this.showError = true;
+        } else {
+          let nextItemId = appData.userTiles.map(item => item.id).sort((a, b) => b - a)[0];
+          if (!nextItemId) {
+            nextItemId = 0;
+          }
+          nextItemId = nextItemId + 1;
+          appData.userTiles.push({
+            id: nextItemId,
+            url,
+            value: name,
+            iconName: icon
+          });
+
+          this.tileItemsService.createOrUpdateJsonDataFile(appData);
+          this.close();
+        }
+      });
   }
 }

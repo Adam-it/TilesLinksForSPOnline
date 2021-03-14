@@ -11,6 +11,7 @@ declare interface IAddTileApplicationCustomizerApplicationCustomizerStrings {
   DialogUrlValidation: string;
   DialogSetIcon: string;
   ErrorMessageClose: string
+  ErrorMessageTitle: string;
   ErrorMessage: string
 }
 

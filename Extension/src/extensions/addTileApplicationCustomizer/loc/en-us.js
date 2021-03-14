@@ -12,6 +12,7 @@ define([], function() {
     "DialogUrlValidation": "url field is required",
     "DialogSetIcon": "Set icon",
     "ErrorMessageClose": "Close",
+    "ErrorMessageTitle": "Error",
     "ErrorMessage": "Something went wrong, please try again."
   }
 });
