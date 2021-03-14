@@ -10,7 +10,6 @@ import { IconPicker } from '@pnp/spfx-controls-react/lib/IconPicker';
 import dialogStyles from '../../styles/Dialog.module.scss';
 import IAddTileDialogContentProps from './IAddTileDialogContentProps';
 import IAddTileDialogContentState from './IAddTileDialogContentState';
-import ProtocolHelper from '../../../helpers/protocolHelper';
 import GlobalSettings from '../../../globals/GlobalSettings';
 
 export default class AddTileDialogContent extends React.Component<IAddTileDialogContentProps, IAddTileDialogContentState> {
@@ -173,7 +172,7 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
     if (panelIsValid) {
       this.props.onAddNewTile(
         name,
-        ProtocolHelper.changeToHtppsProtocol(url),
+        url,
         iconName);
       this.props.close();
     } else {

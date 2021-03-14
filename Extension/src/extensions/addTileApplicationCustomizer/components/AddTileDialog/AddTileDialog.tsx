@@ -7,7 +7,6 @@ import { TextField } from 'office-ui-fabric-react/lib/TextField';
 import { Icon } from 'office-ui-fabric-react/lib/Icon';
 import { IconPicker } from '@pnp/spfx-controls-react/lib/controls/iconPicker';
 import GlobalSettings from '../../../globals/GlobalSettings';
-import ProtocolHelper from '../../../helpers/protocolHelper';
 import dialogStyles from '../../styles/AddTileDialog.module.scss';
 import IAddTileDialogProps from './AddTileDialogProps';
 import IAddTileDialogState from './AddTileDialogState';
@@ -137,7 +136,7 @@ export default class AddTileDialog extends React.Component<IAddTileDialogProps, 
         if (panelIsValid) {
             this.props.onAddNewTile(
                 name,
-                ProtocolHelper.changeToHtppsProtocol(url),
+                url,
                 iconName);
             this.props.onDismiss();
         } else {
