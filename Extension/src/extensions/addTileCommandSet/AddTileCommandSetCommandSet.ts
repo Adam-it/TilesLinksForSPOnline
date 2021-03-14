@@ -14,6 +14,11 @@ import ITileItemsServiceInput from '../model/tileItemsService/ITileItemsServiceI
 
 export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<IAddTileCommandSetCommandSetProperties> {
   private tileItemsService: TileItemsService;
+  private fSObjType = 'FSObjType';
+  private fileType = 'File_x0020_Type';
+  private title = 'Title';
+  private fileRef = 'FileRef';
+  private fileLeafRef = 'FileLeafRef';
 
   @override
   public onInit(): Promise<void> {
@@ -53,11 +58,11 @@ export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<
       case 'AddTile':
         if (event.selectedRows.length >= 1) {
           const item: any = event.selectedRows[0];
-          const isFolder: boolean = item.getValueByName('FSObjType') === '1';
-          const fileType: string = item.getValueByName('File_x0020_Type');
+          const isFolder: boolean = item.getValueByName(this.fSObjType) === '1';
+          const fileType: string = item.getValueByName(this.fileType);
           const isItem: boolean = fileType === '';
-          const url: string = item.getValueByName('FileRef');
-          const namme: string = isItem && !isFolder ? item.getValueByName('Title') : item.getValueByName('FileLeafRef');
+          const url: string = item.getValueByName(this.fileRef);
+          const namme: string = isItem && !isFolder ? item.getValueByName(this.title) : item.getValueByName(this.fileLeafRef);
           const siteUrl: string = this.context.pageContext.web.absoluteUrl.replace(this.context.pageContext.web.serverRelativeUrl, '');
           const dialog: AddTileDialog = new AddTileDialog(
             namme,
