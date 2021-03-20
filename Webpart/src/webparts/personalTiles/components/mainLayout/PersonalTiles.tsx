@@ -70,7 +70,12 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
             this.state.tileItemsService
               .checkIfAppDataFolderExists()
               .then(appDataFolderExists => {
-                if (!appDataFolderExists) {
+                if (appDataFolderExists.isError) {
+                  this.setState({
+                    isError: true,
+                    errorDescription: appDataFolderExists.errorMessage
+                  });
+                } else if (!appDataFolderExists.folderExists) {
                   this.state.tileItemsService
                     .createAppDataFolder()
                     .then(folderName => {
