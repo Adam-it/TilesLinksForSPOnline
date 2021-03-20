@@ -9,6 +9,7 @@ on:
 # Variables that are available for all the jobs in the workflow
 env:
   SPPKG_FILE_NAME: 'personal-tiles.sppkg'
+  SPPKG_EXTENSION_FILE_NAME: 'add-tile-button-extension.sppkg'
   SEND_MAIL: 'true'
 
 jobs:
@@ -30,6 +31,9 @@ jobs:
     - name: Run npm ci
       run: npm ci
       working-directory: Webpart/
+    - name: Run npm ci
+      run: npm ci
+      working-directory: Extension/
     
     # install gulp if mac
     - name: Run npm i -g gulp
@@ -39,6 +43,11 @@ jobs:
     # gulp bundle and package solution
     - name: Bundle and package
       working-directory: Webpart/
+      run: |
+        gulp bundle --ship
+        gulp package-solution --ship    
+    - name: Bundle and package
+      working-directory: Extension/
       run: |
         gulp bundle --ship
         gulp package-solution --ship    
@@ -55,6 +64,12 @@ jobs:
       uses: pnp/action-cli-deploy@v1.0.1
       with:
         APP_FILE_PATH: Webpart/sharepoint/solution/${{ env.SPPKG_FILE_NAME }}
+        SKIP_FEATURE_DEPLOYMENT: true
+        OVERWRITE: true
+    - name: Office 365 CLI Deploy
+      uses: pnp/action-cli-deploy@v1.0.1
+      with:
+        APP_FILE_PATH: Extension/sharepoint/solution/${{ env.SPPKG_EXTENSION_FILE_NAME }}
         SKIP_FEATURE_DEPLOYMENT: true
         OVERWRITE: true
     
