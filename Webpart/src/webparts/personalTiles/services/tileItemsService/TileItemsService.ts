@@ -2,6 +2,7 @@ import { HttpClient, HttpClientResponse } from '@microsoft/sp-http';
 import ITileItemsServiceInput from '../../model/tileItemsService/ITileItemsServiceInput';
 import GlobalSettings from '../../globals/GlobalSettings';
 import IAppData from '../../model/IAppData';
+import IAppDataFolderExistsOutput from '../../model/tileItemsService/IAppDataFolderExistsOutput';
 
 export default class TileItemsService {
 
@@ -29,9 +30,16 @@ export default class TileItemsService {
                 }));
     }
 
-    public async checkIfAppDataFolderExists(): Promise<boolean> {
-        return new Promise<boolean>((resolve, reject) => {
-            resolve(this.getAppDataFolder().then(result => result.value.some(item => item.name === this.appDataFolderName)));
+    public async checkIfAppDataFolderExists(): Promise<IAppDataFolderExistsOutput> {
+        return new Promise<IAppDataFolderExistsOutput>((resolve, reject) => {
+            resolve(this.getAppDataFolder().then(result => {
+                const isError = result.errorCode !== undefined;
+                return {
+                    isError,
+                    errorMessage: isError ? result.errorMessage : '',
+                    folderExists: !isError ? result.value.some(item => item.name === this.appDataFolderName) : false
+                } as IAppDataFolderExistsOutput;
+            }));
         });
     }
 
@@ -75,6 +83,13 @@ export default class TileItemsService {
                 .get((error, response: any, rawResponse?: any) => {
                     if (error) {
                         return;
+                    }
+
+                    if (response.value.length === 0) {
+                        resolve(
+                            {
+                                userTiles: []
+                            } as IAppData);
                     }
 
                     const downloadUrl = response.value.filter(item => item.name === this.appDataJsonFileName)[0]['@microsoft.graph.downloadUrl'];
