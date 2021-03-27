@@ -1,4 +1,4 @@
-# Personal Links
+# Personal Links Webpart
 
 ## 📝 Description
 This webpart provides a personalized view for links. This provides an another way of navigation that may be created by the user to content that is important for them. The webpart may be added as teams personal app and teams tab. User links are saved in a json file in their OneDrive app catalog folder.
