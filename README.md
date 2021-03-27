@@ -18,11 +18,6 @@ This kind of solution gives an another personalized navigation for an Intranet p
 ## 💡 Contributing
 Sure why not. If you have ideas for new features or feedback, create an issue in the [issues list](https://github.com/Adam-it/TilesLinksForSPOnline/issues).
 
-## ToDo
-#### what I want to add for this solution 🤔
-- [ ] I want to add Spfx extension for lists and other parts in SharePoint so that the user may use them to create personal links from many parts of and Intranet portal
-- [ ] I want to add some kind of CSOM console app for admin user so that they will be able to add links for other users in tenant
- 
 ## ⚠ Disclaimer
 This code is provided as is without warranty of any kind, either express or implied, including any implied warranties of fitness for a particular purpose, merchantability, or non-infringement.
  
