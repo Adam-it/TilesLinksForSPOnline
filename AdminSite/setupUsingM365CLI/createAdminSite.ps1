@@ -64,9 +64,26 @@ foreach($listItem in $listConfig)
             Add-Log -Level "INFO" -Message "Field - $fieldName - already exists"
         }
     }
-}
 
-#add view to list 
-# set home page to the list view
+    Add-Log -Level "INFO" -Message "Make title field not required"
+    m365 spo field set --webUrl $siteConfig.siteUrl --listTitle $listName --updateExistingLists  --name 'Title' --Required 0
+
+    # modify views
+    Add-Log -Level "INFO" -Message "Modifying views"
+    foreach($view in $listItem.views)
+    {
+        $viewName = $view.name
+        foreach($removeField in $view.removeFields)
+        {
+            Add-Log -Level "INFO" -Message "Removing field $removeField from view $viewName"
+            m365 spo list view field remove --webUrl $siteConfig.siteUrl --fieldTitle $removeField --listTitle $listName --viewTitle $viewName
+        }
+        foreach($addField in $view.addFields)
+        {
+            Add-Log -Level "INFO" -Message "adding field $addField from view $viewName"
+            m365 spo list view field add --webUrl $siteConfig.siteUrl --listTitle $listName --viewTitle $viewName --fieldTitle $addField
+        }
+    }
+}
 
 Add-Log -Level "INFO" -Message "===========END==========="
