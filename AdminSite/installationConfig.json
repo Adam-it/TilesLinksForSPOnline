@@ -2,7 +2,7 @@
     "site": 
     {   
         "siteName": "Personal Links - Admin Site",
-        "siteUrl": "https://tenanttocheck.sharepoint.com/sites/PersonalLinksAdminSite",
+        "siteUrl": "https://tenanttocheck.sharepoint.com/sites/PersonalLinksAdminSite5",
         "siteType": "CommunicationSite"
     },
     "lists":[
@@ -25,7 +25,7 @@
             ],
             "views": [
                 {
-                    "name": "Wszystkie elementy",
+                    "name": "All Items",
                     "removeFields": ["LinkTitle"],
                     "addFields": ["Link Name", "Link Icon Class Name", "Link Url"]
                 }

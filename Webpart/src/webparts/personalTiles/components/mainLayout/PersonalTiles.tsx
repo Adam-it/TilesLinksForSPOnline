@@ -1,7 +1,6 @@
 import * as React from 'react';
 import * as strings from 'PersonalTilesWebPartStrings';
 import { arrayMove } from 'react-sortable-hoc';
-import { Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import { MSGraphClient } from '@microsoft/sp-http';
 import { PanelPosition } from '../../model/enums/PanelPosition';
 import { PanelType } from '../../model/enums/PanelType';
@@ -22,7 +21,6 @@ import ITileItem from '../../model/ITileItem';
 import IAppData from '../../model/IAppData';
 import TileItemsService from '../../services/tileItemsService/TileItemsService';
 import ITileItemsServiceInput from '../../model/tileItemsService/ITileItemsServiceInput';
-import mockTiles from '../../mocks/MockTiles';
 
 export default class PersonalTiles extends React.Component<IPersonalTilesProps, IPersonalTilesState> {
 
@@ -55,64 +53,49 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
   }
 
   public componentDidMount(): void {
-    if (!this.IsWorkbench()) {
-      this.props.context.msGraphClientFactory
-        .getClient()
-        .then((client: MSGraphClient): void => {
-          const input: ITileItemsServiceInput = {
-            httpClient: this.props.context.httpClient,
-            mSGraphClient: client
-          };
+    this.props.context.msGraphClientFactory
+      .getClient()
+      .then((client: MSGraphClient): void => {
+        const input: ITileItemsServiceInput = {
+          httpClient: this.props.context.httpClient,
+          mSGraphClient: client
+        };
 
-          this.setState({ tileItemsService: new TileItemsService(input) });
+        this.setState({ tileItemsService: new TileItemsService(input) });
 
-          try {
-            this.state.tileItemsService
-              .checkIfAppDataFolderExists()
-              .then(appDataFolderExists => {
-                if (appDataFolderExists.isError) {
-                  this.setState({
-                    isError: true,
-                    errorDescription: appDataFolderExists.errorMessage
+        try {
+          this.state.tileItemsService
+            .checkIfAppDataFolderExists()
+            .then(appDataFolderExists => {
+              if (appDataFolderExists.isError) {
+                this.setState({
+                  isError: true,
+                  errorDescription: appDataFolderExists.errorMessage
+                });
+              } else if (!appDataFolderExists.folderExists) {
+                this.state.tileItemsService
+                  .createAppDataFolder()
+                  .then(folderName => {
+                    if (folderName === null) {
+                      this.setState({
+                        isError: true,
+                        errorDescription: strings.ErrorCouldNotGetData
+                      });
+                    } else {
+                      this.LoadData();
+                    }
                   });
-                } else if (!appDataFolderExists.folderExists) {
-                  this.state.tileItemsService
-                    .createAppDataFolder()
-                    .then(folderName => {
-                      if (folderName === null) {
-                        this.setState({
-                          isError: true,
-                          errorDescription: strings.ErrorCouldNotGetData
-                        });
-                      } else {
-                        this.LoadData();
-                      }
-                    });
-                } else {
-                  this.LoadData();
-                }
-              });
-          } catch (exception) {
-            this.setState({
-              isError: true,
-              errorDescription: strings.ErrorCouldNotGetData
+              } else {
+                this.LoadData();
+              }
             });
-          }
-        });
-    }
-    else {
-      const mockedTilesList = mockTiles.getTiles();
-      this.setState({
-        items: mockedTilesList.map((item) => {
-          return {
-            item,
-            editTileClick: this.editTileHandle
-          };
-        }),
-        isLoading: false,
-        isEmpty: mockedTilesList.length === 0
+        } catch (exception) {
+          this.setState({
+            isError: true,
+            errorDescription: strings.ErrorCouldNotGetData
+          });
+        }
       });
-    }
   }
 
   public render() {
@@ -200,14 +183,6 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
           });
         }
       });
-  }
-
-  private IsWorkbench(): boolean {
-    if (Environment.type == EnvironmentType.Local) {
-      return true;
-    }
-
-    return false;
   }
 
   private onSortEnd = ({ oldIndex, newIndex }): void => {

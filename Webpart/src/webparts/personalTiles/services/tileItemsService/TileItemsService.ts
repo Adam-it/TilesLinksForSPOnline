@@ -84,7 +84,7 @@ export default class TileItemsService {
                     if (error) {
                         return;
                     }
-
+                    
                     if (response.value.length === 0) {
                         resolve(
                             {
