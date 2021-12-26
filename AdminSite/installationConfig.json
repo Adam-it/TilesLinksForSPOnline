@@ -1,0 +1,35 @@
+{
+    "site": 
+    {   
+        "siteName": "Personal Links - Admin Site",
+        "siteUrl": "https://sample.sharepoint.com/sites/PersonalLinksAdminSite",
+        "siteType": "CommunicationSite"
+    },
+    "lists":[
+        {
+            "listName": "Predefined Personal Links",
+            "listType": "GenericList",
+            "fields": [
+                {
+                    "fieldName": "Link Name",
+                    "fieldXml": "<Field ID='{DAA84CE2-85B2-43AD-A06F-C6311E7D5E6B}' Type='Text' Name='LinkName' DisplayName='Link Name' Required='TRUE' SourceID='http://schemas.microsoft.com/sharepoint/v3' StaticName='LinkName' FromBaseType='TRUE' />"
+                },
+                {
+                    "fieldName": "Link Icon Class Name",
+                    "fieldXml": "<Field ID='{AC827B0C-8B45-4B4F-927B-CDDC4FEEE79E}' Type='Text' Name='LinkIconClassName' DisplayName='Link Icon Class Name' Required='FALSE' SourceID='http://schemas.microsoft.com/sharepoint/v3' StaticName='LinkIconClassName' FromBaseType='TRUE' />"
+                },
+                {
+                    "fieldName": "Link Url",
+                    "fieldXml": "<Field ID='{1FB99B1B-1EE9-488E-88CE-E95404B409A0}' Type='URL' Format='Hyperlink' Name='LinkUrl' DisplayName='Link Url' Required='TRUE' SourceID='http://schemas.microsoft.com/sharepoint/v3' StaticName='LinkUrl' FromBaseType='TRUE' />"
+                }
+            ],
+            "views": [
+                {
+                    "name": "All Items",
+                    "removeFields": ["LinkTitle"],
+                    "addFields": ["Link Name", "Link Icon Class Name", "Link Url"]
+                }
+            ]
+        }
+    ]
+}

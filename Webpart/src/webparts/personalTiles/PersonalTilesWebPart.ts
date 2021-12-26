@@ -12,7 +12,7 @@ export default class PersonalTilesWebPart extends BaseClientSideWebPart<IPersona
 
   public onInit(): Promise<void> {
     initializeIcons();
-    return Promise.resolve<void>();
+    return Promise.resolve();
   }
 
   public render(): void {

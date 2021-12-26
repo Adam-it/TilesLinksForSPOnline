@@ -35,6 +35,8 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
             tileUrlValidation,
             tileIconName } = this.state;
 
+        const { predefinedLinks } = this.props;
+
         return (
             <div className={panelStyles.grid}>
                 <div className={panelStyles.row}>
@@ -72,12 +74,36 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
                             </ActionButton>
                         </Stack>
                     </div>
+                    {
+                        predefinedLinks.length !== 0 ?
+                            <div className={panelStyles.columnFullWidth}>
+                                <div className={panelStyles.predefinedLinksPanel}>
+                                    <Label>{strings.AddPanelPredefinedLinksTitle}</Label>
+                                    {predefinedLinks.map(item => {
+                                        return (
+                                            <div className={panelStyles.predefinedLink}>
+                                                <ActionButton iconProps={addIcon} onClick={() => this.addPredefinedLinkTile(item.value, item.url, item.iconName)}></ActionButton>
+                                                <a href={item.url}>{item.value}</a>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div> : ''
+                    }
                 </div>
             </div>
         );
     }
 
     private cancel(): void {
+        this.props.onDismiss();
+    }
+
+    private addPredefinedLinkTile(tileName: string, tileUrl: string, tileIconName: string): void{
+        this.props.onAddNewTile(
+            tileName,
+            tileUrl,
+            tileIconName);
         this.props.onDismiss();
     }
 
