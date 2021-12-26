@@ -48,5 +48,14 @@ teams personal app
 ![](images/TeamsPersonalApp.png)
 ![](images/TeamsPersonalApp2.png)
 
+## predefined links (optional setting)
+1. step is to setup an admin site with predifined links list. In order to do that please fallow the README.md present in AdminSite  folder
+2. is to populate adminSite property in GlobalSettings.ts with the url of the admin site created in previous step.
+3. deploy the updated version of the webpart
+
+... thats all. After that user when adding new link be able to see (only if some links were added to the SP list) a predefined list with links the user may just add with a single click.
+![](images/predefinedLinks.png)
+![](images/predefinedLinks2.png)
+
 ## ⚠ Disclaimer
 This code is provided as is without warranty of any kind, either express or implied, including any implied warranties of fitness for a particular purpose, merchantability, or non-infringement.
