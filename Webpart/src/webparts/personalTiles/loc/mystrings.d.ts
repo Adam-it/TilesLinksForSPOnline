@@ -10,6 +10,7 @@ declare interface IPersonalTilesWebPartStrings {
   AddPanelSetIcon: string;
   AddPanelSubmitButton: string;
   AddPanelCancelButton: string;
+  AddPanelPredefinedLinksTitle: string;
   EditPanelTitle: string;
   EditPanelTileTitle: string;
   EditPanelTileUrl: string;

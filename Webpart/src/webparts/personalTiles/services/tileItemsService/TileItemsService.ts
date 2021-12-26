@@ -1,8 +1,9 @@
-import { HttpClient, HttpClientResponse } from '@microsoft/sp-http';
+import { HttpClient, HttpClientResponse, SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import ITileItemsServiceInput from '../../model/tileItemsService/ITileItemsServiceInput';
 import GlobalSettings from '../../globals/GlobalSettings';
 import IAppData from '../../model/IAppData';
 import IAppDataFolderExistsOutput from '../../model/tileItemsService/IAppDataFolderExistsOutput';
+import ITileItem from '../../model/ITileItem';
 
 export default class TileItemsService {
 
@@ -84,7 +85,7 @@ export default class TileItemsService {
                     if (error) {
                         return;
                     }
-                    
+
                     if (response.value.length === 0) {
                         resolve(
                             {
@@ -107,5 +108,23 @@ export default class TileItemsService {
                             resolve(settings);
                         });
                 }));
+    }
+
+    public async getPredefinedItems(): Promise<ITileItem[]> {
+        return this.clients.spHttpClient
+            .get(`${GlobalSettings.adminSite}/_api/lists/GetByTitle('${GlobalSettings.predifinedList}')/items`, SPHttpClient.configurations.v1)
+            .then(response => {
+                return response.json();
+            })
+            .then(json => {
+                console.log(json);
+                return json.value.map((item) => {
+                    return {
+                        value: item[GlobalSettings.linkName],
+                        url: item[GlobalSettings.linkUrl].Url,
+                        iconName: item[GlobalSettings.linkIconClass]
+                    } as ITileItem;
+                });
+            }) as Promise<ITileItem[]>;
     }
 }

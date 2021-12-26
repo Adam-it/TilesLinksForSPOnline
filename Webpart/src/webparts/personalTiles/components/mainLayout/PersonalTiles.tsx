@@ -37,6 +37,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     const tileItemsService: TileItemsService = null;
     const isError: boolean = false;
     const errorDescription: string = '';
+    const predefinedLinks: ITileItem[] = null;
 
     this.state = {
       items,
@@ -47,6 +48,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       sidePanelOpen,
       panelType,
       tileItemsService,
+      predefinedLinks,
       isError,
       errorDescription
     };
@@ -58,7 +60,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       .then((client: MSGraphClient): void => {
         const input: ITileItemsServiceInput = {
           httpClient: this.props.context.httpClient,
-          mSGraphClient: client
+          mSGraphClient: client,
+          spHttpClient: this.props.context.spHttpClient
         };
 
         this.setState({ tileItemsService: new TileItemsService(input) });
@@ -107,6 +110,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       sidePanelOpen,
       panelType,
       itemToEdit,
+      predefinedLinks,
       isError,
       errorDescription } = this.state;
 
@@ -154,7 +158,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
         </div>
         <Panel isOpen={sidePanelOpen} position={PanelPosition.Right} onDismiss={this.onPanelClosed.bind(this)}>
           {panelType === PanelType.Add ?
-            <AddPanel onDismiss={() => this.onPanelClosed()} onAddNewTile={this.onAddNewTile.bind(this)} iconPickerRenderOption={'dialog'} /> :
+            <AddPanel onDismiss={() => this.onPanelClosed()} onAddNewTile={this.onAddNewTile.bind(this)} iconPickerRenderOption={'dialog'} predefinedLinks={predefinedLinks}/> :
             <EditPanel tile={itemToEdit} onDismiss={() => this.onPanelClosed()} onRemove={this.onRemoveTile.bind(this)} onEdit={this.onEditTitle.bind(this)} iconPickerRenderOption={'dialog'} />}
         </Panel>
       </div>
@@ -257,9 +261,13 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
   }
 
   private addTileHandle(): void {
-    this.setState({
-      sidePanelOpen: !this.state.sidePanelOpen,
-      panelType: PanelType.Add
+
+    this.state.tileItemsService.getPredefinedItems().then(predefinedLinks => {
+      this.setState({
+        sidePanelOpen: !this.state.sidePanelOpen,
+        predefinedLinks: predefinedLinks,
+        panelType: PanelType.Add
+      });
     });
   }
 

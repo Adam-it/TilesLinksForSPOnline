@@ -11,6 +11,7 @@ define([], function () {
     "AddPanelSetIcon": "Set icon",
     "AddPanelSubmitButton": "Add",
     "AddPanelCancelButton": "Cancel",
+    "AddPanelPredefinedLinksTitle": "Predefined links",
     "EditPanelTitle": "Edit tile",
     "EditPanelTileTitle": "Name:",
     "EditPanelTileUrl": "Url:",

@@ -91,6 +91,24 @@
                         @include ms-font-su;
                         color: $themePrimary;
                     }
+
+                    .predefinedLinksPanel {
+                        margin-top: 10px;
+                        border-top: 1px solid $grey;
+                        max-height: 300px;
+                        overflow-y: auto;
+                        overflow-x: hidden;
+
+                        .predefinedLink{
+                            text-overflow: ellipsis;
+                            overflow: hidden;
+                            white-space: nowrap;
+                            
+                            a {
+                                color: $themePrimary;
+                            }
+                        }                        
+                    }
                 }
             }
         }
