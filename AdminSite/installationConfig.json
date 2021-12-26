@@ -2,7 +2,7 @@
     "site": 
     {   
         "siteName": "Personal Links - Admin Site",
-        "siteUrl": "https://tenanttocheck.sharepoint.com/sites/PersonalLinksAdminSite5",
+        "siteUrl": "https://sample.sharepoint.com/sites/PersonalLinksAdminSite",
         "siteType": "CommunicationSite"
     },
     "lists":[
