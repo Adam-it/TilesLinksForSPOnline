@@ -1,7 +1,7 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx/client-side-extension-manifest.schema.json",
 
-  "id": "eff44318-60cc-4897-9b10-7b1a4c23d03b",
+  "id": "9b39d2f0-bad6-467a-b797-14ef42fa19fb",
   "alias": "AddTileApplicationCustomizerApplicationC",
   "componentType": "Extension",
   "extensionType": "ApplicationCustomizer",

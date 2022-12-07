@@ -5,11 +5,13 @@ This webpart provides a personalized view for links. This provides an another wa
 
 ## 🚀 How to run
 1. simply clone the repo
-2. run `gulp bundle --ship && gulp package-solution --ship` to build the solution
-3. deploy the .sppkg file from the ..\sharepoint\solution catalog to your SharePoint tenant
+2. run `npm install` to install all required dependencies
+3. run `gulp bundle --ship && gulp package-solution --ship` to build the solution
+4. deploy the .sppkg file from the ..\sharepoint\solution catalog to your SharePoint tenant
 ... please remember that if you plan to use the webpart in teams mark the 'Make this solution available to all sites in the organization' during deploy and then use the 'Sync to teams'
 ![](images/DeployTheApp.png	)
-4. go to API management page and approve the Graph API permissions requested by the webpart, like described in [MSD documentation - deploy the solution and grant permissions](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/use-aad-tutorial#deploy-the-solution-and-grant-permissions)
+5. go to API management page and approve the Graph API permissions requested by the webpart, like described in [MSD documentation - deploy the solution and grant permissions](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/use-aad-tutorial#deploy-the-solution-and-grant-permissions)
+6. if you want to user predefined links feature you need to setup [Admin Site](https://github.com/Adam-it/TilesLinksForSPOnline/tree/master/AdminSite) and fill [GlobalSettings](https://github.com/Adam-it/TilesLinksForSPOnline/blob/master/Webpart/src/webparts/personalTiles/globals/GlobalSettings.ts) set the `usePredefinedLinks` to `true` and `adminSite` to the url of the admin site created in previous step.
 
 ## 📸 results
 

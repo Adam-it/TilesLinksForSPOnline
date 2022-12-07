@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as strings from 'PersonalTilesWebPartStrings';
 import { arrayMove } from 'react-sortable-hoc';
-import { MSGraphClient } from '@microsoft/sp-http';
+import { MSGraphClientV3 } from '@microsoft/sp-http';
 import { PanelPosition } from '../../model/enums/PanelPosition';
 import { PanelType } from '../../model/enums/PanelType';
 import { Label } from 'office-ui-fabric-react/lib/Label';
@@ -21,10 +21,11 @@ import ITileItem from '../../model/ITileItem';
 import IAppData from '../../model/IAppData';
 import TileItemsService from '../../services/tileItemsService/TileItemsService';
 import ITileItemsServiceInput from '../../model/tileItemsService/ITileItemsServiceInput';
+import GlobalSettings from '../../globals/GlobalSettings';
 
 export default class PersonalTiles extends React.Component<IPersonalTilesProps, IPersonalTilesState> {
 
-  constructor(props) {
+  constructor(props : IPersonalTilesProps) {
     super(props);
 
     const items = new Array();
@@ -56,8 +57,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
 
   public componentDidMount(): void {
     this.props.context.msGraphClientFactory
-      .getClient()
-      .then((client: MSGraphClient): void => {
+      .getClient('3')
+      .then((client: MSGraphClientV3): void => {
         const input: ITileItemsServiceInput = {
           httpClient: this.props.context.httpClient,
           mSGraphClient: client,
@@ -189,7 +190,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       });
   }
 
-  private onSortEnd = ({ oldIndex, newIndex }): void => {
+  private onSortEnd = ({ oldIndex, newIndex }: any): void => {
     const prevItems = this.state.items;
     this.setState({
       items: arrayMove(prevItems, oldIndex, newIndex),
@@ -261,14 +262,21 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
   }
 
   private addTileHandle(): void {
-
-    this.state.tileItemsService.getPredefinedItems().then(predefinedLinks => {
+    if(GlobalSettings.usePredefinedLinks){
+      this.state.tileItemsService.getPredefinedItems().then(predefinedLinks => {
+        this.setState({
+          sidePanelOpen: !this.state.sidePanelOpen,
+          predefinedLinks: predefinedLinks,
+          panelType: PanelType.Add
+        });
+      });
+    } else {
       this.setState({
         sidePanelOpen: !this.state.sidePanelOpen,
-        predefinedLinks: predefinedLinks,
+        predefinedLinks: [],
         panelType: PanelType.Add
       });
-    });
+    }
   }
 
   private editTileHandle = (item: ITileItem): void => {

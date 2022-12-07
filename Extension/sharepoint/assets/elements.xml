@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
-    <CustomAction
+  <CustomAction
         Title="AddTileCommandSet"
         RegistrationId="100"
         RegistrationType="List"
@@ -27,7 +27,7 @@
     <CustomAction
         Title="AddTileApplicationCustomizer"
         Location="ClientSideExtension.ApplicationCustomizer"
-        ClientSideComponentId="eff44318-60cc-4897-9b10-7b1a4c23d03b"
+        ClientSideComponentId="9b39d2f0-bad6-467a-b797-14ef42fa19fb"
         ClientSideComponentProperties="{&quot;AddTileApplicationCustomizer&quot;:&quot;Add Tile&quot;}">
     </CustomAction>
 </Elements>

@@ -2,11 +2,29 @@
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
     "name": "add-tile-button-extension-client-side-solution",
-    "id": "385f1bb8-31d8-40f3-92ad-fa8ea555aa17",
+    "id": "146e8521-1fd5-41e0-994c-11de0cceb943",
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.16.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "add-tile-button-extension description"
+      },
+      "longDescription": {
+        "default": "add-tile-button-extension description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
     "webApiPermissionRequests": [
       {
         "resource": "Microsoft Graph",
@@ -15,9 +33,9 @@
     ],
     "features": [
       {
-        "title": "Application Extension - Deployment of custom action.",
+        "title": "Application Extension - Deployment of custom action",
         "description": "Deploys a custom action with ClientSideComponentId association",
-        "id": "9327f761-a32b-430e-9762-780796e73745",
+        "id": "ab1a9d92-0cb9-4b74-acef-b6bf15048a2c",
         "version": "1.0.0.0",
         "assets": {
           "elementManifests": [

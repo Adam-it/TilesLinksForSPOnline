@@ -1,9 +1,9 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
   "solution": {
-    "name": "personal-tiles-client-side-solution",
-    "id": "13ae1b50-0c66-4f7f-b7bb-e0d5e1f6a718",
-    "version": "1.0.2.0",
+    "name": "personal-tiles-web-part-client-side-solution",
+    "id": "c9eebb4b-c3da-41bd-af54-6959e3f07aa3",
+    "version": "2.0.0.0",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -12,16 +12,35 @@
       "websiteUrl": "",
       "privacyUrl": "",
       "termsOfUseUrl": "",
-      "mpnId": "Undefined-1.13.0"
+      "mpnId": "Undefined-1.16.0"
     },
     "webApiPermissionRequests": [
       {
         "resource": "Microsoft Graph",
         "scope": "Sites.ReadWrite.All"
       }
+    ],
+    "metadata": {
+      "shortDescription": {
+        "default": "personal-tiles-web-part description"
+      },
+      "longDescription": {
+        "default": "personal-tiles-web-part description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "personal-tiles-web-part Feature",
+        "description": "The feature that activates elements of the personal-tiles-web-part solution.",
+        "id": "37da6365-e0f1-46d4-859d-1e678af9c82e",
+        "version": "1.0.0.0"
+      }
     ]
   },
   "paths": {
-    "zippedPackage": "solution/personal-tiles.sppkg"
+    "zippedPackage": "solution/personal-tiles-web-part.sppkg"
   }
 }

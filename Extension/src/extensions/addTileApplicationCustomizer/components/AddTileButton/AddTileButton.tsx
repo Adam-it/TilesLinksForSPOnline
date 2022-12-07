@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as strings from 'AddTileApplicationCustomizerApplicationCustomizerStrings';
-import { MSGraphClient } from '@microsoft/sp-http';
+import { MSGraphClientV3 } from '@microsoft/sp-http';
 import { PrimaryButton, DefaultButton } from 'office-ui-fabric-react/lib/Button';
 import { Dialog, DialogType, DialogFooter } from 'office-ui-fabric-react/lib/Dialog';
 import addTileButtonStyles from '../../styles/AddTileButton.module.scss';
@@ -12,7 +12,7 @@ import AddTileDialog from '../AddTileDialog/AddTileDialog';
 
 export default class AddTileButton extends React.Component<IAddTileButtonProps, IAddTileButtonState> {
 
-    constructor(props) {
+    constructor(props: IAddTileButtonProps) {
         super(props);
 
         this.state = {
@@ -22,8 +22,8 @@ export default class AddTileButton extends React.Component<IAddTileButtonProps, 
         };
 
         this.props.context.msGraphClientFactory
-            .getClient()
-            .then((client: MSGraphClient): void => {
+          .getClient('3')
+          .then((client: MSGraphClientV3): void => {
                 const input: ITileItemsServiceInput = {
                     httpClient: this.props.context.httpClient,
                     mSGraphClient: client

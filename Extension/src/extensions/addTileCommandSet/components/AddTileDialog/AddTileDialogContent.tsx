@@ -14,7 +14,7 @@ import GlobalSettings from '../../../globals/GlobalSettings';
 
 export default class AddTileDialogContent extends React.Component<IAddTileDialogContentProps, IAddTileDialogContentState> {
 
-  constructor(props) {
+  constructor(props: IAddTileDialogContentProps) {
     super(props);
 
     const {
@@ -133,7 +133,7 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
     }
   }
 
-  private handleTitleChange(event): void {
+  private handleTitleChange(event: any): void {
     const title = event.target.value;
 
     this.setState({
@@ -142,7 +142,7 @@ export default class AddTileDialogContent extends React.Component<IAddTileDialog
     });
   }
 
-  private handleUrlChange(event): void {
+  private handleUrlChange(event: any): void {
     const url = event.target.value;
 
     this.setState({
