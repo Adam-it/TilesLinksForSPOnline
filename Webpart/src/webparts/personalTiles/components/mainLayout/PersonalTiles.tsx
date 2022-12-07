@@ -21,6 +21,7 @@ import ITileItem from '../../model/ITileItem';
 import IAppData from '../../model/IAppData';
 import TileItemsService from '../../services/tileItemsService/TileItemsService';
 import ITileItemsServiceInput from '../../model/tileItemsService/ITileItemsServiceInput';
+import GlobalSettings from '../../globals/GlobalSettings';
 
 export default class PersonalTiles extends React.Component<IPersonalTilesProps, IPersonalTilesState> {
 
@@ -261,14 +262,21 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
   }
 
   private addTileHandle(): void {
-
-    this.state.tileItemsService.getPredefinedItems().then(predefinedLinks => {
+    if(GlobalSettings.usePredefinedLinks){
+      this.state.tileItemsService.getPredefinedItems().then(predefinedLinks => {
+        this.setState({
+          sidePanelOpen: !this.state.sidePanelOpen,
+          predefinedLinks: predefinedLinks,
+          panelType: PanelType.Add
+        });
+      });
+    } else {
       this.setState({
         sidePanelOpen: !this.state.sidePanelOpen,
-        predefinedLinks: predefinedLinks,
+        predefinedLinks: [],
         panelType: PanelType.Add
       });
-    });
+    }
   }
 
   private editTileHandle = (item: ITileItem): void => {
