@@ -11,7 +11,7 @@ import ProtocolHelper from '../../helpers/protocolHelper';
 
 export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelState> {
 
-    constructor(props) {
+    constructor(props: IAddPanelProps) {
         super(props);
 
         this.state = {
@@ -136,7 +136,7 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
         }
     }
 
-    private handleTitleChange(event): void {
+    private handleTitleChange(event: any): void {
         const title: string = event.target.value;
 
         this.setState({
@@ -145,7 +145,7 @@ export default class AddPanel extends React.Component<IAddPanelProps, IAddPanelS
         });
     }
 
-    private handleUrlChange(event): void {
+    private handleUrlChange(event: any): void {
         const url: string = event.target.value;
 
         this.setState({

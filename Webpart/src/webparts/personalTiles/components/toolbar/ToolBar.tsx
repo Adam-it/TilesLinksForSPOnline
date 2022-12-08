@@ -7,7 +7,7 @@ import mainStyles from '../../styles/PersonalTiles.module.scss';
 
 export default class ToolBar extends React.Component<IToolBarProps, IToolBarState> {
 
-    constructor(props) {
+    constructor(props: IToolBarProps) {
         super(props);
         this.state = {
             items: [{
