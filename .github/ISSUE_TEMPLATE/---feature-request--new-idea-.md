@@ -1,17 +1,20 @@
 ---
 name: "\U0001F4A1 Feature request (new idea)"
 about: Suggest an idea for this project
-title: ''
+title: '[💡 Feature]  '
 labels: ''
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description ... as best as you can 👍
+### Is your feature request related to a problem? Please describe.
 
-**Describe the solution you'd like**
-A clear and concise description 📑
+> A clear and concise description ... as best as you can 👍
 
-**Additional context**
-Add any other context or screenshots about the feature request here. Anything that might help me would be a great help.. thanks 😊
+### Describe the solution you'd like
+
+> A clear and concise description 📑
+
+### Additional context
+
+> Add any other context or screenshots about the feature request here. Anything that might help me would be a great help.. thanks 😊
