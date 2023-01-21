@@ -28,7 +28,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
   constructor(props : IPersonalTilesProps) {
     super(props);
 
-    const items = new Array();
+    const items: [] = [];
     const itemToEdit: ITileItem = null;
     const sortingIsActive: boolean = false;
     const isLoading: boolean = true;
@@ -55,10 +55,10 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     };
   }
 
-  public componentDidMount(): void {
-    this.props.context.msGraphClientFactory
+  public async componentDidMount(): Promise<void> {
+    await this.props.context.msGraphClientFactory
       .getClient('3')
-      .then((client: MSGraphClientV3): void => {
+      .then(async (client: MSGraphClientV3): Promise<void> => {
         const input: ITileItemsServiceInput = {
           httpClient: this.props.context.httpClient,
           mSGraphClient: client,
@@ -68,29 +68,29 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
         this.setState({ tileItemsService: new TileItemsService(input) });
 
         try {
-          this.state.tileItemsService
+          await this.state.tileItemsService
             .checkIfAppDataFolderExists()
-            .then(appDataFolderExists => {
+            .then(async (appDataFolderExists) => {
               if (appDataFolderExists.isError) {
                 this.setState({
                   isError: true,
                   errorDescription: appDataFolderExists.errorMessage
                 });
               } else if (!appDataFolderExists.folderExists) {
-                this.state.tileItemsService
+                await this.state.tileItemsService
                   .createAppDataFolder()
-                  .then(folderName => {
+                  .then(async (folderName) => {
                     if (folderName === null) {
                       this.setState({
                         isError: true,
                         errorDescription: strings.ErrorCouldNotGetData
                       });
                     } else {
-                      this.LoadData();
+                      await this.LoadData();
                     }
                   });
               } else {
-                this.LoadData();
+                await this.LoadData();
               }
             });
         } catch (exception) {
@@ -102,7 +102,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       });
   }
 
-  public render() {
+  public render(): JSX.Element {
     const {
       items,
       sortingIsActive,
@@ -166,8 +166,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     );
   }
 
-  private LoadData(): void {
-    this.state.tileItemsService
+  private async LoadData(): Promise<void> {
+    await this.state.tileItemsService
       .getJsonAppDataFile()
       .then(appData => {
         if (appData === null) {
@@ -261,9 +261,9 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     this.state.tileItemsService.createOrUpdateJsonDataFile(appData);
   }
 
-  private addTileHandle(): void {
+  private async addTileHandle(): Promise<void> {
     if(GlobalSettings.usePredefinedLinks){
-      this.state.tileItemsService.getPredefinedItems().then(predefinedLinks => {
+      await this.state.tileItemsService.getPredefinedItems().then(predefinedLinks => {
         this.setState({
           sidePanelOpen: !this.state.sidePanelOpen,
           predefinedLinks: predefinedLinks,

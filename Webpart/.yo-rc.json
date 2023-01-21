@@ -7,7 +7,7 @@
       "@microsoft/microsoft-graph-client": "3.0.2",
       "@microsoft/teams-js": "2.4.1"
     },
-    "version": "1.16.0",
+    "version": "1.16.1",
     "libraryName": "personal-tiles-web-part",
     "libraryId": "c9eebb4b-c3da-41bd-af54-6959e3f07aa3",
     "environment": "spo",
