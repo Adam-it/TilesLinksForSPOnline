@@ -1,6 +1,4 @@
 import { override } from '@microsoft/decorators';
-import { Log } from '@microsoft/sp-core-library';
-import { MSGraphClient } from '@microsoft/sp-http';
 import {
   BaseListViewCommandSet,
   Command,
@@ -24,9 +22,9 @@ export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<
   public onInit(): Promise<void> {
     this.context.msGraphClientFactory
       .getClient()
-      .then((client: MSGraphClient): void => {
+      .then((client: any): void => {
         const input: ITileItemsServiceInput = {
-          httpClient: this.context.httpClient,
+          httpClient: this.context.httpClient as any,
           mSGraphClient: client
         };
 

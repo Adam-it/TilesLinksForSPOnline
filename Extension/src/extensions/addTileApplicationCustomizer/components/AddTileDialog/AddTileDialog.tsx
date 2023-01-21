@@ -13,7 +13,7 @@ import IAddTileDialogState from './AddTileDialogState';
 
 export default class AddTileDialog extends React.Component<IAddTileDialogProps, IAddTileDialogState> {
 
-    constructor(props) {
+    constructor(props: IAddTileDialogProps) {
         super(props);
 
         const {
@@ -93,7 +93,7 @@ export default class AddTileDialog extends React.Component<IAddTileDialogProps, 
             </Dialog>);
     }
 
-    private handleTitleChange(event): void {
+    private handleTitleChange(event: any): void {
         const title = event.target.value;
 
         this.setState({
@@ -102,7 +102,7 @@ export default class AddTileDialog extends React.Component<IAddTileDialogProps, 
         });
     }
 
-    private handleUrlChange(event): void {
+    private handleUrlChange(event: any): void {
         const url = event.target.value;
 
         this.setState({

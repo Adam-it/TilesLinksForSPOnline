@@ -20,7 +20,7 @@ export default class TileItemsService {
             this.clients.mSGraphClient
                 .api(`/me/drive/special/approot/children?$filter=name eq '${this.appDataFolderName}'`)
                 .version('v1.0')
-                .get((error, response: any, rawResponse?: any) => {
+                .get((error: any, response: any, rawResponse?: any) => {
                     if (error) {
                         resolve(error);
                     }
@@ -31,7 +31,7 @@ export default class TileItemsService {
 
     public async checkIfAppDataFolderExists(): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
-            resolve(this.getAppDataFolder().then(result => result.value.some(item => item.name === this.appDataFolderName)));
+            resolve(this.getAppDataFolder().then(result => result.value.some((item: any) => item.name === this.appDataFolderName)));
         });
     }
 
@@ -47,7 +47,7 @@ export default class TileItemsService {
                 .api('/me/drive/special/approot/children')
                 .version('v1.0')
                 .post(driveItem)
-                .then(result => {
+                .then((result: any) => {
                     if (result != null) {
                         resolve(result.name.toString());
                     }
@@ -57,7 +57,7 @@ export default class TileItemsService {
     public createOrUpdateJsonDataFile(appData: IAppData): void {
         this.getAppDataFolder()
             .then(response => {
-                const id = response.value.filter(item => item.name === this.appDataFolderName)[0].id;
+                const id = response.value.filter((item: any) => item.name === this.appDataFolderName)[0].id;
                 const stream = JSON.stringify(appData);
 
                 this.clients.mSGraphClient
@@ -72,12 +72,12 @@ export default class TileItemsService {
             this.clients.mSGraphClient
                 .api(`/me/drive/special/approot:/${this.appDataFolderName}:/children?$filter=name eq '${this.appDataJsonFileName}'`)
                 .version('v1.0')
-                .get((error, response: any, rawResponse?: any) => {
+                .get((error: any, response: any, rawResponse?: any) => {
                     if (error) {
                         return;
                     }
 
-                    const downloadUrl = response.value.filter(item => item.name === this.appDataJsonFileName)[0]['@microsoft.graph.downloadUrl'];
+                    const downloadUrl = response.value.filter((item: any) => item.name === this.appDataJsonFileName)[0]['@microsoft.graph.downloadUrl'];
                     this.clients.httpClient
                         .get(downloadUrl, HttpClient.configurations.v1)
                         .then((innerResponse: HttpClientResponse): Promise<string> => {
