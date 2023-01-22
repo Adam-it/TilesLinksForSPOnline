@@ -2,12 +2,20 @@
   "@microsoft/generator-sharepoint": {
     "plusBeta": false,
     "isCreatingSolution": true,
+    "nodeVersion": "16.18.1",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.4.1"
+    },
+    "version": "1.16.1",
+    "libraryName": "personal-tiles-web-part",
+    "libraryId": "c9eebb4b-c3da-41bd-af54-6959e3f07aa3",
     "environment": "spo",
-    "version": "1.13.0",
-    "libraryName": "personal-tiles",
-    "libraryId": "13ae1b50-0c66-4f7f-b7bb-e0d5e1f6a718",
     "packageManager": "npm",
-    "isDomainIsolated": true,
+    "solutionName": "personal-tiles-web-part",
+    "solutionShortDescription": "personal-tiles-web-part description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
     "componentType": "webpart"
   }
 }

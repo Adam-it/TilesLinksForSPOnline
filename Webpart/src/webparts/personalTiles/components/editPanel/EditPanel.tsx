@@ -11,7 +11,7 @@ import ProtocolHelper from '../../helpers/protocolHelper';
 
 export default class EditPanel extends React.Component<IEditPanelProps, IEditPanelState> {
 
-    constructor(props) {
+    constructor(props: IEditPanelProps) {
         super(props);
 
         const tile = this.props.tile;
@@ -139,7 +139,7 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
         }
     }
 
-    private handleTitleChange(event): void {
+    private handleTitleChange(event: any): void {
         const title = event.target.value;
 
         this.setState({
@@ -148,7 +148,7 @@ export default class EditPanel extends React.Component<IEditPanelProps, IEditPan
         });
     }
 
-    private handleUrlChange(event): void {
+    private handleUrlChange(event: any): void {
         const url = event.target.value;
 
         this.setState({

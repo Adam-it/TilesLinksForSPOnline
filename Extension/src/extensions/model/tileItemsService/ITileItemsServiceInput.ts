@@ -1,6 +1,6 @@
-import { MSGraphClient, HttpClient } from '@microsoft/sp-http';
+import { MSGraphClientV3, HttpClient } from '@microsoft/sp-http';
 
 export default interface ITileItemsServiceInput{
-    mSGraphClient: MSGraphClient;
+    mSGraphClient: MSGraphClientV3;
     httpClient: HttpClient;
 }

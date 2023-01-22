@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as strings from 'PersonalTilesWebPartStrings';
 import { arrayMove } from 'react-sortable-hoc';
-import { MSGraphClient } from '@microsoft/sp-http';
+import { MSGraphClientV3 } from '@microsoft/sp-http';
 import { PanelPosition } from '../../model/enums/PanelPosition';
 import { PanelType } from '../../model/enums/PanelType';
 import { Label } from 'office-ui-fabric-react/lib/Label';
@@ -21,13 +21,14 @@ import ITileItem from '../../model/ITileItem';
 import IAppData from '../../model/IAppData';
 import TileItemsService from '../../services/tileItemsService/TileItemsService';
 import ITileItemsServiceInput from '../../model/tileItemsService/ITileItemsServiceInput';
+import GlobalSettings from '../../globals/GlobalSettings';
 
 export default class PersonalTiles extends React.Component<IPersonalTilesProps, IPersonalTilesState> {
 
-  constructor(props) {
+  constructor(props : IPersonalTilesProps) {
     super(props);
 
-    const items = new Array();
+    const items: [] = [];
     const itemToEdit: ITileItem = null;
     const sortingIsActive: boolean = false;
     const isLoading: boolean = true;
@@ -54,10 +55,10 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     };
   }
 
-  public componentDidMount(): void {
-    this.props.context.msGraphClientFactory
-      .getClient()
-      .then((client: MSGraphClient): void => {
+  public async componentDidMount(): Promise<void> {
+    await this.props.context.msGraphClientFactory
+      .getClient('3')
+      .then(async (client: MSGraphClientV3): Promise<void> => {
         const input: ITileItemsServiceInput = {
           httpClient: this.props.context.httpClient,
           mSGraphClient: client,
@@ -67,29 +68,29 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
         this.setState({ tileItemsService: new TileItemsService(input) });
 
         try {
-          this.state.tileItemsService
+          await this.state.tileItemsService
             .checkIfAppDataFolderExists()
-            .then(appDataFolderExists => {
+            .then(async (appDataFolderExists) => {
               if (appDataFolderExists.isError) {
                 this.setState({
                   isError: true,
                   errorDescription: appDataFolderExists.errorMessage
                 });
               } else if (!appDataFolderExists.folderExists) {
-                this.state.tileItemsService
+                await this.state.tileItemsService
                   .createAppDataFolder()
-                  .then(folderName => {
+                  .then(async (folderName) => {
                     if (folderName === null) {
                       this.setState({
                         isError: true,
                         errorDescription: strings.ErrorCouldNotGetData
                       });
                     } else {
-                      this.LoadData();
+                      await this.LoadData();
                     }
                   });
               } else {
-                this.LoadData();
+                await this.LoadData();
               }
             });
         } catch (exception) {
@@ -101,7 +102,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       });
   }
 
-  public render() {
+  public render(): JSX.Element {
     const {
       items,
       sortingIsActive,
@@ -165,8 +166,8 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     );
   }
 
-  private LoadData(): void {
-    this.state.tileItemsService
+  private async LoadData(): Promise<void> {
+    await this.state.tileItemsService
       .getJsonAppDataFile()
       .then(appData => {
         if (appData === null) {
@@ -189,7 +190,7 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
       });
   }
 
-  private onSortEnd = ({ oldIndex, newIndex }): void => {
+  private onSortEnd = ({ oldIndex, newIndex }: any): void => {
     const prevItems = this.state.items;
     this.setState({
       items: arrayMove(prevItems, oldIndex, newIndex),
@@ -260,15 +261,22 @@ export default class PersonalTiles extends React.Component<IPersonalTilesProps, 
     this.state.tileItemsService.createOrUpdateJsonDataFile(appData);
   }
 
-  private addTileHandle(): void {
-
-    this.state.tileItemsService.getPredefinedItems().then(predefinedLinks => {
+  private async addTileHandle(): Promise<void> {
+    if(GlobalSettings.usePredefinedLinks){
+      await this.state.tileItemsService.getPredefinedItems().then(predefinedLinks => {
+        this.setState({
+          sidePanelOpen: !this.state.sidePanelOpen,
+          predefinedLinks: predefinedLinks,
+          panelType: PanelType.Add
+        });
+      });
+    } else {
       this.setState({
         sidePanelOpen: !this.state.sidePanelOpen,
-        predefinedLinks: predefinedLinks,
+        predefinedLinks: [],
         panelType: PanelType.Add
       });
-    });
+    }
   }
 
   private editTileHandle = (item: ITileItem): void => {

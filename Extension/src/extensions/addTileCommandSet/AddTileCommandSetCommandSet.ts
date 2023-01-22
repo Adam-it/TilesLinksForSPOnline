@@ -1,6 +1,4 @@
 import { override } from '@microsoft/decorators';
-import { Log } from '@microsoft/sp-core-library';
-import { MSGraphClient } from '@microsoft/sp-http';
 import {
   BaseListViewCommandSet,
   Command,
@@ -11,6 +9,7 @@ import { IAddTileCommandSetCommandSetProperties } from './IAddTileCommandSetComm
 import AddTileDialog from './components/AddTileDialog/AddTileDialog';
 import TileItemsService from '../services/tileItemsService/TileItemsService';
 import ITileItemsServiceInput from '../model/tileItemsService/ITileItemsServiceInput';
+import { MSGraphClientV3 } from '@microsoft/sp-http';
 
 export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<IAddTileCommandSetCommandSetProperties> {
   private tileItemsService: TileItemsService;
@@ -21,22 +20,22 @@ export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<
   private fileLeafRef = 'FileLeafRef';
 
   @override
-  public onInit(): Promise<void> {
-    this.context.msGraphClientFactory
-      .getClient()
-      .then((client: MSGraphClient): void => {
+  public async onInit(): Promise<void> {
+    await this.context.msGraphClientFactory
+      .getClient('3')
+      .then(async (client: MSGraphClientV3): Promise<void> => {
         const input: ITileItemsServiceInput = {
-          httpClient: this.context.httpClient,
+          httpClient: this.context.httpClient as any,
           mSGraphClient: client
         };
 
         this.tileItemsService = new TileItemsService(input);
 
-        this.tileItemsService
+        await this.tileItemsService
           .checkIfAppDataFolderExists()
-          .then(appDataFolderExists => {
+          .then(async (appDataFolderExists): Promise<void> => {
             if (!appDataFolderExists) {
-              this.tileItemsService.createAppDataFolder();
+              await this.tileItemsService.createAppDataFolder();
             }
           });
       });
@@ -53,7 +52,7 @@ export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<
   }
 
   @override
-  public onExecute(event: IListViewCommandSetExecuteEventParameters): void {
+  public async onExecute(event: IListViewCommandSetExecuteEventParameters): Promise<void> {
     switch (event.itemId) {
       case 'AddTile':
         if (event.selectedRows.length >= 1) {
@@ -71,7 +70,7 @@ export default class AddTileCommandSetCommandSet extends BaseListViewCommandSet<
             isFolder,
             fileType,
             this.tileItemsService);
-          dialog.show();
+          await dialog.show();
         }
         break;
       default:

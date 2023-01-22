@@ -1,11 +1,20 @@
 {
   "@microsoft/generator-sharepoint": {
-    "isCreatingSolution": false,
-    "environment": "spo",
-    "version": "1.10.0",
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "16.18.1",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.4.1"
+    },
+    "version": "1.16.1",
     "libraryName": "add-tile-button-extension",
-    "libraryId": "385f1bb8-31d8-40f3-92ad-fa8ea555aa17",
+    "libraryId": "146e8521-1fd5-41e0-994c-11de0cceb943",
+    "environment": "spo",
     "packageManager": "npm",
+    "solutionName": "add-tile-button-extension",
+    "solutionShortDescription": "add-tile-button-extension description",
+    "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "componentType": "extension",
     "extensionType": "ApplicationCustomizer"
