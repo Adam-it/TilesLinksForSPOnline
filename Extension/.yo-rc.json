@@ -7,7 +7,7 @@
       "@microsoft/microsoft-graph-client": "3.0.2",
       "@microsoft/teams-js": "2.4.1"
     },
-    "version": "1.16.0",
+    "version": "1.16.1",
     "libraryName": "add-tile-button-extension",
     "libraryId": "146e8521-1fd5-41e0-994c-11de0cceb943",
     "environment": "spo",
