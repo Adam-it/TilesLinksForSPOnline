@@ -1,9 +1,11 @@
 # Personal Links Webpart
 
 ## 📝 Description
+
 This webpart provides a personalized view for links. This provides an another way of navigation that may be created by the user to content that is important for them. The webpart may be added as teams personal app and teams tab. User links are saved in a json file in their OneDrive app catalog folder.
 
 ## 🚀 How to run
+
 1. simply clone the repo
 2. run `npm install` to install all required dependencies
 3. run `gulp bundle --ship && gulp package-solution --ship` to build the solution
@@ -19,7 +21,7 @@ adding webpart to the page
 
 ![](images/1.gif)
 
-this is how the webpart looks in SharePoint
+this is how the webpart look like in SharePoint
 
 ![](images/SharePointAsWebpartOnPage.png)
 ![](images/SharePointAsWebpartOnPage2.png)
@@ -51,8 +53,9 @@ teams personal app
 ![](images/TeamsPersonalApp2.png)
 
 ## predefined links (optional setting)
-1. step is to setup an admin site with predifined links list. In order to do that please fallow the README.md present in AdminSite  folder
-2. is to populate adminSite property in GlobalSettings.ts with the url of the admin site created in previous step.
+
+1. step is to setup an admin site with predifined links list. In order to do that please fallow the README.md present in AdminSite folder
+2. populate adminSite property in GlobalSettings.ts with the url of the admin site created in previous step.
 3. deploy the updated version of the webpart
 
 ... thats all. After that user when adding new link be able to see (only if some links were added to the SP list) a predefined list with links the user may just add with a single click.
@@ -60,4 +63,5 @@ teams personal app
 ![](images/predefinedLinks2.png)
 
 ## ⚠ Disclaimer
+
 This code is provided as is without warranty of any kind, either express or implied, including any implied warranties of fitness for a particular purpose, merchantability, or non-infringement.
